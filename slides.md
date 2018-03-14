@@ -7,13 +7,13 @@ Stefan Schwartze
 ## About React
 
 Note: (about 45 to 60 minutes)
+---
 
 ### What is React?
-----
-Note: 
 Just a SIMPLE view library
-No router, no state management, no HTTP client etc  (keeps it small, no framework)
-Difference compared to Angular etc.
+Note: 
+* No router, no state management, no HTTP client etc  (keeps it small, no framework)
+* Difference compared to Angular etc.
 ---
 
 ### Basic principles of React
@@ -34,6 +34,7 @@ Example: Page, separated in single components
 ---
 
 ### How to render a component
+----
 React DOM
 Static vs stateful components
 Props 
@@ -51,22 +52,29 @@ Event handlers
 ---
 
 ### React lifecycle methods
+----
 Use cases for every method
+Note: 
+* componentWillMount()
+* componentDidMount()
+* shouldComponentUpdate()
+* componentReceivedProps()
 ---
 
 ### React Example application consuming a API (DEMO)
+Note: 
 Show props and state changes in React developer tools
 ---
 
 ### Advantages of React:
-Small / Simple / Modular
-Very comfortable JSX syntax (supporting full JS usage)
-No custom keywords required like *ngFor, *ngIf, pipes | v-if, v-for, just plain JS!
-Virtual DOM 
-What and why?
-Universal Javascript (one codebase for all)
-allows server side rendering
-doesn’t require client to enable JS
+* Small / Simple / Modular
+* Very comfortable JSX syntax (supporting full JS usage)
+    - No custom keywords required like *ngFor, *ngIf, pipes | v-if, v-for, just plain JS!
+* Virtual DOM 
+    - What and why?
+* Universal Javascript (one codebase for all)
+    - allows server side rendering
+    - doesn’t require client to enable JS
 ---
 
 
