@@ -35,19 +35,29 @@ Example: Page, separated in single components
 
 ### How to render a component
 ----
-React DOM
-Static vs stateful components
-Props 
+#### React DOM
+----
+#### Static vs stateful components
+----
+#### Props 
 for getting information from parent components
+----
 Prop Types
+----
 Passing props
+----
 Children
- State
- state stays internal
+#### State
+state stays internal
+----
 Default state, Accessing, mutating state
+----
 Example that shows how state + props work (DEMO)
+----
 Unidirectional data flow (sharing state between components)
+----
 Moving state up in the components tree
+----
 Event handlers
 ---
 
@@ -57,8 +67,11 @@ Use cases for every method
 Note: 
 * componentWillMount()
 * componentDidMount()
+    * API request
 * shouldComponentUpdate()
+    * Only update if specific condition has changed
 * componentReceivedProps()
+    * 
 ---
 
 ### React Example application consuming a API (DEMO)
