@@ -14,16 +14,17 @@ Note: (about 45 to 60 minutes)
 * Created by Facebook in 2013
 * Goal: Splitting UI in different components
 Note:
-* Very popular because of simplicity
+* Very popular because of simplicity (at that time compared to Angular)
 * No router, no state management, no HTTP client etc  (keeps it small, no framework)
 * Difference compared to Angular etc.
+* TODO: Table with React, Angular etc.
 ---
 
 ### Basic principles of React
 ----
 #### JSX (JavaScript XML)
 ----
-```
+``` javascript
 const element = <h1>Hello, world!</h1>;
 ```
 * **Looks like**: HTML mixed with JavaScript 
@@ -33,7 +34,7 @@ Note:
 * React works without JSX, but nobody would ever do this
 ----
 ##### Inserting strings
-```
+``` javascript
 const text = 'Hello, world!';
 const element = <h1>{text}</h1>;
 ```
@@ -83,29 +84,162 @@ const element = {
 ----
 
 #### React DOM
-----
+_attaching elements to the DOM_
 
+**HTML**
+```
+<div id="root"></div>
+```
+
+**JavaScript**
+``` javascript
+const element = <h1>Hello, world</h1>;
+ReactDOM.render(element, document.getElementById('root'));
+```
 ----
-#### Components
-----
-What are components? Encapsulated, independent
-can be nested to each other
-----
-Example: Page, separated in single components
+**Example for re-rendering**
+
+https://reactjs.org/redirect-to-codepen/rendering-elements/update-rendered-element
+
+Note:
+* Show updates in DevTools
 ---
+### Components
+----
 
+#### What are components? 
+* Encapsulated, independent
+* Can be nested to each other
+
+![alt Example structure of a blogging platform](https://cdn-images-1.medium.com/max/1600/0*4p1fVzn0x6rh6kL9.png)
+----
+TODO: Image of component tree!
+
+#### Creating a component
+
+```javascript
+const Welcome = (props) => { // Functional
+  return <h1>Hello, {props.name}</h1>;
+}
+```
+_equals to_
+```javascript
+class Welcome extends React.Component { // Class / Stateful
+  render() {
+    return <h1>Hello, {props.name}</h1>;
+  }
+}
+```
+Note:
+From React's point of view equal
+----
 ### How to render a component
+<br/>
+**HTML element**:
+```javascript
+const element = <div />;
+```
+
+**Component**:
+```javascript
+const element = <Welcome name="Sara" />;
+```
 ----
-#### Static vs stateful components
+
+**[Example](https://reactjs.org/redirect-to-codepen/components-and-props/rendering-a-component)**
+```javascript
+const Welcome = (props) => {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+const element = <Welcome name="Sara" />;
+ReactDOM.render(
+  element,
+  document.getElementById('root')
+);
+```
+Note:
+* We call ReactDOM.render() with the <Welcome name="Sara" /> element.
+* React calls the Welcome component with {name: 'Sara'} as the props.
+* Our Welcome component returns a <h1>Hello, Sara</h1> element as the result.
+* React DOM efficiently updates the DOM to match <h1>Hello, Sara</h1>.
 ----
+
+#### Functional vs stateless vs stateful components
+* **Functional**: simple JavaScript functions
+* **Stateless**: only render props received from outside
+* **Stateful**: manage internal state
+----
+
 #### Props 
-for getting information from parent components
+* Retrieving information from parent components
+* Read-only
 ----
-Prop Types
+##### Prop Types
+
+```javascript
+import PropTypes from 'prop-types'; 
+import React from 'react';
+class BlogPostExcerpt extends React.Component { 
+  render() { 
+    return ( 
+      <div> 
+        <h1>{this.props.title}</h1> 
+        <p>{this.props.description}</p> 
+      </div> 
+    ) 
+  } 
+} 
+BlogPostExcerpt.propTypes = { 
+  title: PropTypes.string, 
+  description: PropTypes.string 
+}; 
+export default BlogPostExcerpt;
+```
+Note:
+* TODO: Codepen example with default props etc.
 ----
-Passing props
+**Possible types**
+
+* PropTypes.array
+* PropTypes.bool
+* PropTypes.func
+* PropTypes.number
+* PropTypes.object
+* PropTypes.string
+* PropTypes.symbol
+* PropTypes.oneOf(['Test1', 'Test2'])
+* PropTypes.instanceOf(Something)
+* PropTypes.arrayOf(PropTypes.string)
 ----
-Children
+
+* Requiring properties
+```javascript
+PropTypes.arrayOf(PropTypes.string).isRequired
+PropTypes.string.isRequired
+```
+
+* Default values for props
+```javascript
+BlogPostExcerpt.propTypes = { 
+    title: PropTypes.string, 
+    description: PropTypes.string 
+} 
+BlogPostExcerpt.defaultProps = { 
+    title: '', 
+    description: '' 
+}
+```
+----
+**Passing props**
+```javascript
+const desc = 'A description' 
+//... 
+<BlogPostExcerpt title="A blog post" description={desc} />
+```
+----
+**Children**
+----
 #### State
 state stays internal
 ----
@@ -194,3 +328,5 @@ Example using Redux
 ## Sources
 
 * React docs: https://reactjs.org/docs
+* Flavio Copes: https://medium.freecodecamp.org/the-beginners-guide-to-react-9be65f50a55c
+* 
