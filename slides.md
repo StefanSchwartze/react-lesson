@@ -253,18 +253,14 @@ class Welcome extends Component {
     return (
       <div>
         <h1>{this.props.name}</h1>
-        <ul>
-          {
-            this.props.children.map((child, index) => 
-              <li key={index}>{child}</li>
-            )
-          }
-        </ul>
+        <ul>{this.props.children}</ul>
       </div> 
     ) 
   } 
 } 
 ```
+Note:
+* Doesn't work for functional components because class is missing
 ----
 #### State
 state stays internal
@@ -273,11 +269,34 @@ Default state, Accessing, mutating state
 ----
 Example that shows how state + props work (DEMO)
 ----
+
 Unidirectional data flow (sharing state between components)
 ----
 Moving state up in the components tree
 ----
 Event handlers
+---
+
+### JSX: Conditional rendering and lists
+----
+
+#### Conditions
+```javascript
+function Greeting(props) {
+  if (props.isLoggedIn) {
+    return <UserGreeting />;
+  }
+  return <GuestGreeting />;
+}
+
+ReactDOM.render(
+  // Try changing to isLoggedIn={true}:
+  <Greeting isLoggedIn={false} />,
+  document.getElementById('root')
+);
+```
+Note: 
+* Angular uses specific keywords like *ngIf, JSX just uses plain JavaScript
 ---
 
 ### React lifecycle methods
@@ -286,11 +305,10 @@ Use cases for every method
 Note: 
 * componentWillMount()
 * componentDidMount()
-    * API request
+  * API request
 * shouldComponentUpdate()
-    * Only update if specific condition has changed
+  * Only update if specific condition has changed
 * componentReceivedProps()
-    * 
 ---
 
 ### React Example application consuming a API (DEMO)
@@ -301,12 +319,12 @@ Show props and state changes in React developer tools
 ### Advantages of React:
 * Small / Simple / Modular
 * Very comfortable JSX syntax (supporting full JS usage)
-    - No custom keywords required like *ngFor, *ngIf, pipes | v-if, v-for, just plain JS!
+  - No custom keywords required like *ngFor, *ngIf, pipes | v-if, v-for, just plain JS!
 * Virtual DOM 
-    - What and why?
+  - What and why?
 * Universal JavaScript (one codebase for all)
-    - allows server side rendering
-    - doesn’t require client to enable JS
+  - allows server side rendering
+  - doesn’t require client to enable JS
 ---
 
 
