@@ -290,13 +290,102 @@ function Greeting(props) {
 }
 
 ReactDOM.render(
-  // Try changing to isLoggedIn={true}:
   <Greeting isLoggedIn={false} />,
   document.getElementById('root')
 );
 ```
 Note: 
 * Angular uses specific keywords like *ngIf, JSX just uses plain JavaScript
+----
+
+### Lists
+```javascript
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <li key={number.toString()}>
+      {number}
+    </li>
+  );
+  return (
+    <ul>{listItems}</ul>
+  );
+}
+
+const numbers = [1, 2, 3, 4, 5];
+ReactDOM.render(
+  <NumberList numbers={numbers} />,
+  document.getElementById('root')
+);
+```
+[Codepen](https://codepen.io/gaearon/pen/jrXYRR?editors=0011)
+Note:
+* Show also with TodoList
+----
+
+### Examples comparing Angular vs. React
+
+Angular
+```javascript
+<ul *ngFor="let item of items">
+  <li>{{item.text}}</li>
+</ul>
+```
+
+React
+```javascript
+<ul>
+  {items.map(item => <li>{item.text}</li>)}
+</ul>
+```
+----
+
+Angular
+```javascript
+<ul *ngFor="let item of items; let i = index">
+  <li>{{i}} {{item.text}}</li>
+</ul>
+```
+
+React
+```javascript
+<ul>
+  {items.map((item, i) => 
+    <li>{i} {item.text}</li>
+  )}
+</ul>
+```
+----
+
+Angular
+```javascript
+<ul *ngFor="let item of items; let i = index">
+  <li>{{item.text}}</li>
+</ul>
+```
+
+React
+```javascript
+<ul>
+  {items.map((item, i) => 
+    <li>{i} {item.text}</li>
+  )}
+</ul>
+```
+
+[Codepen](https://codepen.io/gaearon/pen/NRZYGN?editors=0010)
+----
+
+* Always use keys to avoid re-rendering
+* Use plain JS functions for conditions and loops
+
+Note:
+Use case | Angular | React
+--- | --- | ---
+Conditions | *ngIf / else / then | a ? b : c (pure JS)
+Loops | *ngFor | .map, .forEach ...
+Indexing | trackByFn | key = ...
+Reduce, filter | Custom func. | JS
 ---
 
 ### React lifecycle methods
