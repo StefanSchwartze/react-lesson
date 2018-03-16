@@ -222,23 +222,49 @@ PropTypes.string.isRequired
 * Default values for props
 ```javascript
 BlogPostExcerpt.propTypes = { 
-    title: PropTypes.string, 
-    description: PropTypes.string 
+  title: PropTypes.string, 
+  description: PropTypes.string 
 } 
 BlogPostExcerpt.defaultProps = { 
-    title: '', 
-    description: '' 
+  title: '', 
+  description: '' 
 }
 ```
 ----
-**Passing props**
+
+##### Passing props
 ```javascript
 const desc = 'A description' 
 //... 
 <BlogPostExcerpt title="A blog post" description={desc} />
 ```
 ----
-**Children**
+##### Children
+
+```javascript
+<Welcome name="Max"> 
+  <p>I'am a child!</p>
+</Welcome>
+```
+Can be used with `this.props.children`:
+```javascript
+class Welcome extends Component { 
+  render() { 
+    return (
+      <div>
+        <h1>{this.props.name}</h1>
+        <ul>
+          {
+            this.props.children.map((child, index) => 
+              <li key={index}>{child}</li>
+            )
+          }
+        </ul>
+      </div> 
+    ) 
+  } 
+} 
+```
 ----
 #### State
 state stays internal
