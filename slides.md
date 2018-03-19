@@ -199,16 +199,16 @@ Note:
 ----
 **Possible types**
 
-* PropTypes.array
-* PropTypes.bool
-* PropTypes.func
-* PropTypes.number
-* PropTypes.object
-* PropTypes.string
-* PropTypes.symbol
-* PropTypes.oneOf(['Test1', 'Test2'])
-* PropTypes.instanceOf(Something)
-* PropTypes.arrayOf(PropTypes.string)
+* `PropTypes.array`
+* `PropTypes.bool`
+* `PropTypes.func`
+* `PropTypes.number`
+* `PropTypes.object`
+* `PropTypes.string`
+* `PropTypes.symbol`
+* `PropTypes.oneOf(['Test1', 'Test2'])`
+* `PropTypes.instanceOf(Something)`
+* `PropTypes.arrayOf(PropTypes.string)`
 ----
 
 * Requiring properties
@@ -261,18 +261,75 @@ Note:
 * Doesn't work for functional components because class is missing
 ----
 #### State
-state stays internal
+* State stays internal
+* Can be modified
 ----
-Default state, Accessing, mutating state
-----
-Example that shows how state + props work (DEMO)
+##### Default state
+```javascript
+class BlogPostExcerpt extends Component {
+  constructor(props) { 
+    super(props);
+    this.state = { clicked: false };
+  } 
+  render() { 
+    return (
+      <div> 
+        <h1>Title</h1> 
+        <p>Description</p> 
+        <p>Clicked: {this.state.clicked}</p> 
+      </div> 
+    ) 
+  } 
+}
+```
+Note:
+* constructor initializes component
+* super() is required for calling React.Components constructor
 ----
 
-Unidirectional data flow (sharing state between components)
+##### Mutating the state
+
+* State should **never** be mutated directly:
+```javascript
+this.state.clicked = true;
+```
+
+* Instead use:
+```javascript
+this.setState({ clicked: true});
+```
+
+-> _Important to inform React about State changes_
+
 ----
-Moving state up in the components tree
+##### Converting a functional to a stateful component
+
+```javascript
+function Clock(props) {
+  return (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {props.date.toLocaleTimeString()}.</h2>
+    </div>
+  );
+}
+
+function tick() {
+  ReactDOM.render(
+    <Clock date={new Date()} />,
+    document.getElementById('root')
+  );
+}
+
+setInterval(tick, 1000);
+```
+[Codepen](http://codepen.io/gaearon/pen/dpdoYR?editors=0010)
 ----
-Event handlers
+
+#### Unidirectional data flow (sharing state between components)
+##### Moving state up in the components tree
+----
+#### Event handlers
 ---
 
 ### JSX: Conditional rendering and lists
