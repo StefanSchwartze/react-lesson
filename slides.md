@@ -97,9 +97,7 @@ const element = <h1>Hello, world</h1>;
 ReactDOM.render(element, document.getElementById('root'));
 ```
 ----
-**Example for re-rendering**
-
-https://reactjs.org/redirect-to-codepen/rendering-elements/update-rendered-element
+##### [Example for re-rendering](https://reactjs.org/redirect-to-codepen/rendering-elements/update-rendered-element)
 
 Note:
 * Show updates in DevTools
@@ -146,7 +144,7 @@ const element = <Welcome name="Sara" />;
 ```
 ----
 
-**[Example](https://reactjs.org/redirect-to-codepen/components-and-props/rendering-a-component)**
+#### [Example](https://reactjs.org/redirect-to-codepen/components-and-props/rendering-a-component)
 ```javascript
 const Welcome = (props) => {
   return <h1>Hello, {props.name}</h1>;
@@ -324,9 +322,12 @@ Note:
 ----
 
 ### Examples comparing Angular vs. React
+----
+
+#### Simple looping
 
 Angular
-```javascript
+```
 <ul *ngFor="let item of items">
   <li>{{item.text}}</li>
 </ul>
@@ -340,8 +341,10 @@ React
 ```
 ----
 
+#### Index
+
 Angular
-```javascript
+```
 <ul *ngFor="let item of items; let i = index">
   <li>{{i}} {{item.text}}</li>
 </ul>
@@ -357,18 +360,53 @@ React
 ```
 ----
 
+#### Keys / trackBy
+
 Angular
-```javascript
-<ul *ngFor="let item of items; let i = index">
+```
+<ul *ngFor="let item of items; trackBy: trackByFn">
   <li>{{item.text}}</li>
 </ul>
+...
+trackByFn(index, item) {
+  return index;
+}
 ```
 
 React
 ```javascript
 <ul>
-  {items.map((item, i) => 
-    <li>{i} {item.text}</li>
+  {items.map(item => 
+    <li key={item.id}>{item.text}</li>
+  )}
+</ul>
+```
+----
+
+#### Filtering vs. Pipes
+
+Angular
+```
+<ul *ngFor="let item of items | filterDone">
+  <li>{{item.text}}</li>
+</ul>
+
+@Pipe({
+  name:"filterDone"
+})
+class FilterDone {
+  transform(items: string): Array<Todo> {
+    return items.filter({done} => done);
+  }
+}
+```
+----
+
+React
+```javascript
+<ul>
+  {items.filter({done} => done).map(item => 
+    <li key={item.id}>{item.text}</li>
   )}
 </ul>
 ```
@@ -432,7 +470,9 @@ Global
 Component-based
 Inline
 
-Routing using React-Router
+Routing using React-Router (v4)
+Note:
+* Be careful on Stackoverflow with old versions
 
 Basic vs dumb vs smart components
 
