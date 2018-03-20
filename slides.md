@@ -326,9 +326,63 @@ setInterval(tick, 1000);
 [Codepen](http://codepen.io/gaearon/pen/dpdoYR?editors=0010)
 ----
 
-#### Unidirectional data flow (sharing state between components)
-##### Moving state up in the components tree
+#### Unidirectional data flow
+
+![alt Data flow in React](https://i2.wp.com/pbs.twimg.com/media/DInWVnyVAAEAtP3.jpg?w=640&ssl=1)
+
+Note:
+* Props get passed from top to bottom
+* State stays internally per component
+* TODO: nice graphic!
 ----
+##### Moving state up in the components tree
+
+```javascript
+class Converter extends React.Component { 
+  constructor(props) { 
+    super(props)
+    this.state = { currency: '€' } 
+  } 
+  render() { 
+    return ( 
+      <div> 
+        <Display currency={this.state.currency} />
+        <CurrencySwitcher currency={this.state.currency} />
+      </div> 
+    ) 
+  } 
+}
+```
+Note:
+* State will from now be maintained in parent component
+----
+##### Mutating functions in props to talk to parent
+```javascript
+render() { 
+  return (
+    <CurrencySwitcher 
+      currency={this.state.currency} 
+      handleChangeCurrency={this.handleChangeCurrency} 
+    /> 
+  )
+}
+```
+```javascript
+const CurrencySwitcher = (props) => { 
+  return ( 
+    <button onClick={props.handleChangeCurrency}> 
+      Current currency is {props.currency}. Change it! 
+    </button> 
+  ) 
+}
+```
+[Codepen 1](https://codepen.io/anon/pen/XEpoqO?editors=0010)
+[Codepen 2](https://codepen.io/gaearon/pen/WZpxpz?editors=0010)
+
+Note:
+* handlers can be compared to Angulars Output
+----
+
 #### Event handlers
 ---
 
