@@ -173,6 +173,14 @@ Note:
 * Retrieving information from parent components
 * Read-only
 ----
+
+##### Passing props
+```javascript
+const desc = 'A description' 
+//... 
+<BlogPostExcerpt title="A blog post" description={desc} />
+```
+----
 ##### Prop Types
 
 ```javascript
@@ -230,13 +238,6 @@ BlogPostExcerpt.defaultProps = {
 ```
 ----
 
-##### Passing props
-```javascript
-const desc = 'A description' 
-//... 
-<BlogPostExcerpt title="A blog post" description={desc} />
-```
-----
 ##### Children
 
 ```javascript
@@ -251,7 +252,7 @@ class Welcome extends Component {
     return (
       <div>
         <h1>{this.props.name}</h1>
-        <ul>{this.props.children}</ul>
+        <div>{this.props.children}</div>
       </div> 
     ) 
   } 
@@ -262,7 +263,7 @@ Note:
 ----
 #### State
 * State stays internal
-* Can be modified
+* Can be modified by component
 ----
 ##### Default state
 ```javascript
@@ -383,8 +384,86 @@ Note:
 * handlers can be compared to Angulars Output
 ----
 
-#### Event handlers
----
+#### Events
+
+* **HTML**
+```html
+<button onclick="handleClick()"> ... </button>
+```
+
+* **React**
+```javascript
+<button onClick={this.handleClick}> ... </button> 
+```
+
+* React always uses __camelCase__:
+	* onsubmit -> onSubmit etc.
+* **Don't** use any event listeners
+* Huge list of events available in [React Docs](https://reactjs.org/docs/events.html#clipboard-events)
+----
+
+#### Handling events
+
+Best practice: **Handlers**
+```javascript
+class Button extends React.Component { 
+	handleClick(event) => { 
+		// do something
+	}
+	render() {
+		return (
+      <button onClick={this.handleClick}>Click me</button>
+		);
+	}
+}
+```
+* All handlers receive events according to [W3C UI Events spec](https://www.w3.org/TR/DOM-Level-3-Events/).
+----
+
+##### Methods not bound by default
+```javascript
+...
+handleClick() => { 
+	console.log(this) // undefined
+}
+...
+```
+
+Bind `this` in constructor:
+```javascript
+constructor(props) {
+	super(props);
+	// This binding is necessary to make `this` work in the callback
+	this.handleClick = this.handleClick.bind(this);
+}
+```
+----
+
+##### New experimental syntax
+```javascript
+// This syntax ensures `this` is bound within handleClick.
+// Warning: this is *experimental* syntax.
+handleClick = () => {
+	console.log('this is:', this);
+}
+```
+Note:
+* Can be enabled as Babel plugin
+* Enabled in `create-react-app` by default
+----
+##### Preventing default behaviour
+```javascript
+function ActionLink() {
+  function handleClick(e) {
+    e.preventDefault();
+    console.log('The link was clicked.');
+  }
+
+  return <a href="#" onClick={handleClick}>Click me</a>;
+}
+```
+----
+
 
 ### JSX: Conditional rendering and lists
 ----
@@ -613,4 +692,6 @@ Example using Redux
 
 * React docs: https://reactjs.org/docs
 * Flavio Copes: https://medium.freecodecamp.org/the-beginners-guide-to-react-9be65f50a55c
-* 
+
+
+TODO: React stastics of usage in projects; compare to other popular libraries and frameworks
