@@ -5,11 +5,6 @@ Stefan Schwartze
 ---
 
 ## About React
-
-Note: (about 45 to 60 minutes)
----
-
-### What is React?
 * Library for creating interactive UIs
 * Created by Facebook in 2013
 * Goal: Splitting UI in different components
@@ -20,9 +15,9 @@ Note:
 * TODO: Table with React, Angular etc.
 ---
 
-### Basic principles of React
+## Basic principles of React
 ----
-#### JSX (JavaScript XML)
+### JSX (JavaScript XML)
 ----
 ``` javascript
 const element = <h1>Hello, world!</h1>;
@@ -32,20 +27,21 @@ const element = <h1>Hello, world!</h1>;
 * **Is**: No _string_, no _HTML_. Just JavaScript used for templates
 Note:
 * React works without JSX, but nobody would ever do this
+* Usually compiled within transpilers like Babel
 ----
-##### Inserting strings
+#### Inserting strings
 ``` javascript
 const text = 'Hello, world!';
 const element = <h1>{text}</h1>;
 ```
 ----
-##### Inserting attributes
+#### Inserting attributes
 ```
 const uniqueId = 'unique';
 const element = <h1 id={uniqueId}>Hello, world!</h1>;
 ```  
 <br/>
-###### Special cases
+##### Special cases
 * `class` -> `className`
 * ` for ` -> `htmlFor`
 * Always in **camelCase**: ` tabindex ` -> `tabIndex`
@@ -53,7 +49,7 @@ Note:
 * Example pen by React: https://codepen.io/pen?&editors=0010
 ----
 
-###### JSX ~~required~~
+##### JSX ~~required~~
 <br/>
 ``` javascript
 const element = <h1 className="greeting">Hello, world!</h1>;
@@ -70,7 +66,7 @@ Note:
 * JSX is compiled to React.createElement calls
 ----
 
-#### Output:
+### Output:
 
 ``` javascript
 const element = {
@@ -83,7 +79,7 @@ const element = {
 ```
 ----
 
-#### React DOM
+### React DOM
 _attaching elements to the DOM_
 
 **HTML**
@@ -97,15 +93,15 @@ const element = <h1>Hello, world</h1>;
 ReactDOM.render(element, document.getElementById('root'));
 ```
 ----
-##### [Example for re-rendering](https://reactjs.org/redirect-to-codepen/rendering-elements/update-rendered-element)
+#### [Example for re-rendering](https://reactjs.org/redirect-to-codepen/rendering-elements/update-rendered-element)
 
 Note:
 * Show updates in DevTools
 ---
-### Components
+## Components
 ----
 
-#### What are components? 
+### What are components? 
 * Encapsulated, independent
 * Can be nested to each other
 
@@ -113,7 +109,7 @@ Note:
 ----
 TODO: Image of component tree!
 
-#### Creating a component
+### Creating a component
 
 ```javascript
 const Welcome = (props) => { // Functional
@@ -144,7 +140,7 @@ const element = <Welcome name="Sara" />;
 ```
 ----
 
-#### [Example](https://reactjs.org/redirect-to-codepen/components-and-props/rendering-a-component)
+### [Example](https://reactjs.org/redirect-to-codepen/components-and-props/rendering-a-component)
 ```javascript
 const Welcome = (props) => {
   return <h1>Hello, {props.name}</h1>;
@@ -163,25 +159,25 @@ Note:
 * React DOM efficiently updates the DOM to match <h1>Hello, Sara</h1>.
 ----
 
-#### Functional vs stateless vs stateful components
+### Functional vs stateless vs stateful components
 * **Functional**: simple JavaScript functions
 * **Stateless**: only render props received from outside
 * **Stateful**: manage internal state
 ----
 
-#### Props 
+### Props 
 * Retrieving information from parent components
 * Read-only
 ----
 
-##### Passing props
+#### Passing props
 ```javascript
 const desc = 'A description' 
 //... 
 <BlogPostExcerpt title="A blog post" description={desc} />
 ```
 ----
-##### Prop Types
+#### Prop Types
 
 ```javascript
 import PropTypes from 'prop-types'; 
@@ -238,7 +234,7 @@ BlogPostExcerpt.defaultProps = {
 ```
 ----
 
-##### Children
+#### Children
 
 ```javascript
 <Welcome name="Max"> 
@@ -261,11 +257,11 @@ class Welcome extends Component {
 Note:
 * Doesn't work for functional components because class is missing
 ----
-#### State
+### State
 * State stays internal
 * Can be modified by component
 ----
-##### Default state
+#### Default state
 ```javascript
 class BlogPostExcerpt extends Component {
   constructor(props) { 
@@ -288,7 +284,7 @@ Note:
 * super() is required for calling React.Components constructor
 ----
 
-##### Mutating the state
+#### Mutating the state
 
 * State should **never** be mutated directly:
 ```javascript
@@ -303,7 +299,7 @@ this.setState({ clicked: true});
 -> _Important to inform React about State changes_
 
 ----
-##### Converting a functional to a stateful component
+#### Converting a functional to a stateful component
 
 ```javascript
 function Clock(props) {
@@ -327,7 +323,7 @@ setInterval(tick, 1000);
 [Codepen](http://codepen.io/gaearon/pen/dpdoYR?editors=0010)
 ----
 
-#### Unidirectional data flow
+### Unidirectional data flow
 
 ![alt Data flow in React](https://i2.wp.com/pbs.twimg.com/media/DInWVnyVAAEAtP3.jpg?w=640&ssl=1)
 
@@ -336,7 +332,7 @@ Note:
 * State stays internally per component
 * TODO: nice graphic!
 ----
-##### Moving state up in the components tree
+#### Moving state up in the components tree
 
 ```javascript
 class Converter extends React.Component { 
@@ -357,7 +353,7 @@ class Converter extends React.Component {
 Note:
 * State will from now be maintained in parent component
 ----
-##### Mutating functions in props to talk to parent
+#### Mutating functions in props to talk to parent
 ```javascript
 render() { 
   return (
@@ -384,7 +380,7 @@ Note:
 * handlers can be compared to Angulars Output
 ----
 
-#### Events
+### Events
 
 * **HTML**
 ```html
@@ -402,7 +398,7 @@ Note:
 * Huge list of events available in [React Docs](https://reactjs.org/docs/events.html#clipboard-events)
 ----
 
-#### Handling events
+### Handling events
 
 Best practice: **Handlers**
 ```javascript
@@ -420,7 +416,7 @@ class Button extends React.Component {
 * All handlers receive events according to [W3C UI Events spec](https://www.w3.org/TR/DOM-Level-3-Events/).
 ----
 
-##### Methods not bound by default
+#### Methods not bound by default
 ```javascript
 ...
 handleClick() => { 
@@ -439,7 +435,7 @@ constructor(props) {
 ```
 ----
 
-##### New experimental syntax
+#### New experimental syntax
 ```javascript
 // This syntax ensures `this` is bound within handleClick.
 // Warning: this is *experimental* syntax.
@@ -451,7 +447,7 @@ Note:
 * Can be enabled as Babel plugin
 * Enabled in `create-react-app` by default
 ----
-##### Preventing default behaviour
+#### Preventing default behaviour
 ```javascript
 function ActionLink() {
   function handleClick(e) {
@@ -465,10 +461,10 @@ function ActionLink() {
 ----
 
 
-### JSX: Conditional rendering and lists
+## JSX: Conditional rendering and lists
 ----
 
-#### Conditions
+### Conditions
 ```javascript
 function Greeting(props) {
   if (props.isLoggedIn) {
@@ -585,7 +581,7 @@ Angular
   name:"filterDone"
 })
 class FilterDone {
-  transform(items: string): Array<Todo> {
+  transform(items: Array<Todo>): Array<Todo> {
     return items.filter({done} => done);
   }
 }
@@ -604,8 +600,9 @@ React
 [Codepen](https://codepen.io/gaearon/pen/NRZYGN?editors=0010)
 ----
 
-* Always use keys to avoid re-rendering
-* Use plain JS functions for conditions and loops
+* **Always** use keys to avoid re-rendering
+* **Don't** use index: can cause problems with sorting; is used by default
+* **Use** plain JS functions for conditions and loops
 
 Note:
 Use case | Angular | React
@@ -616,7 +613,7 @@ Indexing | trackByFn | key = ...
 Reduce, filter | Custom func. | JS
 ---
 
-### React lifecycle methods
+## React lifecycle methods
 ----
 Use cases for every method
 Note: 
@@ -628,12 +625,12 @@ Note:
 * componentReceivedProps()
 ---
 
-### React Example application consuming a API (DEMO)
+## React Example application consuming a API (DEMO)
 Note: 
 Show props and state changes in React developer tools
 ---
 
-### Advantages of React:
+## Advantages of React:
 * Small / Simple / Modular
 * Very comfortable JSX syntax (supporting full JS usage)
   - No custom keywords required like *ngFor, *ngIf, pipes | v-if, v-for, just plain JS!
@@ -695,3 +692,4 @@ Example using Redux
 
 
 TODO: React stastics of usage in projects; compare to other popular libraries and frameworks
+TODO: Explain create-react-app before coding session
