@@ -614,15 +614,104 @@ Reduce, filter | Custom func. | JS
 ---
 
 ## React lifecycle methods
+![alt Lifecycle methods](https://cdn-images-1.medium.com/max/2000/1*XcGM-8E_hGl4fpAr9wJIsA.png)
 ----
-Use cases for every method
-Note: 
-* componentWillMount()
-* componentDidMount()
-  * API request
-* shouldComponentUpdate()
-  * Only update if specific condition has changed
-* componentReceivedProps()
+
+### componentWillMount()
+
+* Directly called after constructor
+* Can call **setState**: Yes. But **don't** do that. Use default state instead.
+
+Note:
+* Calling setState will not trigger extra rendering
+* React recommends to avoid any side-effects or subscriptions in this method
+* Use didMount instead
+* Can be compared to onInit in Angular
+----
+
+### componentDidMount()
+
+* Component is mounted, ready to use
+* Perfect to setup subscriptions or AJAX requests
+* Used for initalizations that require DOM
+* Can call **setState**: **Yes**. Will cause an exra rendering.
+
+Note:
+* e.g. modals, tooltips, positioning of elements
+* draw on a <canvas> element that you just rendered
+* initialize a masonry grid layout from a collection of elements
+* add event listeners
+* Can be compared to AfterViewInit in Angular
+----
+
+### componentWillReceiveProps()
+
+* Called when new data from parent component arrives
+* Used for state updates in response to prop changes
+* Can call **setState**: **Yes**.
+
+Note:
+* has access to old and new props + state
+* Also updates when same props are passed
+* Example: drawing `canvas` circle when perecentage changed
+* Can be compared to onChanges in Angular
+----
+
+### shouldComponentUpdate()
+
+* Called before re-rendering when state or props changed
+* Used for performance improvements / preventing re-rendering
+* Returning **`false`** prevents updates
+* Can call **setState**: **No**.
+
+Note:
+* defaults to true
+* stop updating when nonsense in props has changed
+* doing deep nested comparisons is expensive and not recommended
+----
+
+#### Example
+```javascript
+shouldComponentUpdate(nextProps, nextState) {
+	return this.props.title !== nextProps.title || 
+				this.state.loading !== nextState.loading;
+}
+```
+
+Note:
+* only use when having performance problems
+* React.PureComponent implements method with a shallow compare
+* Comparable to ngDoCheck in Angular
+----
+
+### componentWillUpdate()
+
+* Can call **setState**: **No**.
+----
+
+### componentDidUpdate()
+
+* Can call **setState**: **Yes**.
+----
+
+### componentWillUnmount()
+
+* Invoked before removing component
+* Used for last cleanups
+	```javascript
+componentWillUnmount() {
+	window.removeEventListener('resize', this.resizeListener);
+}
+	```
+* Can call **setState**: **No**.
+
+Note:
+* Can be compared to onDestroy in Angular
+---
+
+### Conclusion
+
+* Ideally not used
 ---
 
 ## React Example application consuming a API (DEMO)
@@ -645,32 +734,33 @@ Show props and state changes in React developer tools
 
 
 
-BREAK
-————————————————————————————————
-
+Note:
 PART 2: Using React (about 20 - 30 minutes (+ evtl. 30 minutes) ) —> talk + discussions (+ eventually Hands On with coding)
 
-Short recap
-
-Styling
-Global
-Component-based
-Inline
-
-Routing using React-Router (v4)
+## Short recap
+---
+## Styling
+* Global
+* Component-based
+* Inline
+---
+## Routing using React-Router (v4)
 Note:
 * Be careful on Stackoverflow with old versions
+---
+## Basic vs dumb vs smart components
+---
+## (Coding a React application / Hands On)
+---
 
-Basic vs dumb vs smart components
 
-(Coding a React application / Hands On)
 
-BREAK
-————————————————————————————————
 
+Note:
 PART 3: FLUX (about 30 minutes) —> talk + discussions (OPTIONAL)
 
-Problem: sharing state between components
+## Flux
+* Problem: sharing state between components
 
 What is FLUX?
 Maintaining application state
@@ -689,6 +779,7 @@ Example using Redux
 
 * React docs: https://reactjs.org/docs
 * Flavio Copes: https://medium.freecodecamp.org/the-beginners-guide-to-react-9be65f50a55c
+* Scott Domes: https://engineering.musefind.com/react-lifecycle-methods-how-and-when-to-use-them-2111a1b692b1
 
 
 TODO: React stastics of usage in projects; compare to other popular libraries and frameworks
