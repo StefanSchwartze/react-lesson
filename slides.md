@@ -730,11 +730,27 @@ Note:
 ![alt Lifecycle methods](https://cdn-images-1.medium.com/max/1600/1*u8hTumGAPQMYZIvfgQMfPA.jpeg)
 ---
 
-## React Example application consuming a API (DEMO)
-Note: 
-Show props and state changes in React developer tools
+## Styling
+* Global
+* Component-based (css-modules)
+* Inline
 ---
 
+## Routing using React-Router (v4)
+Note:
+* Be careful on Stackoverflow with old versions
+---
+
+## Basic vs dumb vs smart components
+---
+
+## React developer tools
+Note: 
+* Show props and state changes in React developer tools
+---
+
+## Create React app
+---
 
 ## Advantages of React:
 * Small / Simple / Modular
@@ -747,50 +763,53 @@ Show props and state changes in React developer tools
   - doesn’t require client to enable JS
 ---
 
+## State management
+----
+### Problem: sharing state between components
+----
 
+### Using stores for UI state
+---
 
+## Flux
+* What is FLUX?
+* Maintaining application state
+* Just a pattern, no library
 
+* Basic principles of FLUX:
+  - Store
+  - Actions
+  - Dispatchers
+
+## Redux
+- One store replicating whole state tree
+- Does not mutate the state, always creates a new one 
+- Allows time-traveling
+- Easy testable
+---
+
+## MobX
+- Always mutates the state
+- Really easy setup
+---
+
+## MobX vs. Redux
+- Mutable / immutable
+- Multiple stores / one store
+- Object-oriented / functional
+- Easy getting started / much boilerplate code
+----
+
+### Which one is better?
+- The one you are more familiar with
+---
+
+## Coding a React application / Hands-On
+----
 
 Note:
 PART 2: Using React (about 20 - 30 minutes (+ evtl. 30 minutes) ) —> talk + discussions (+ eventually Hands On with coding)
-
-## Short recap
----
-## Styling
-* Global
-* Component-based (css-modules)
-* Inline
----
-## Routing using React-Router (v4)
-Note:
-* Be careful on Stackoverflow with old versions
----
-## Basic vs dumb vs smart components
----
-## (Coding a React application / Hands On)
----
-
-
-
-
-Note:
 PART 3: FLUX (about 30 minutes) —> talk + discussions (OPTIONAL)
-
-## Flux
-* Problem: sharing state between components
-
-What is FLUX?
-Maintaining application state
-Just a pattern, no library
-
-Basic principles of FLUX
-Store
-Actions
-Dispatchers
-
-Example using Redux
-
-
 
 ## Sources
 
