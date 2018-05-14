@@ -635,7 +635,7 @@ Note:
 * Component is mounted, ready to use
 * Perfect to setup subscriptions or AJAX requests
 * Used for initalizations that require DOM
-* Can call **setState**: **Yes**. Will cause an exra rendering.
+* Can call **setState**: **Yes**. Will cause an extra rendering.
 
 Note:
 * e.g. modals, tooltips, positioning of elements
@@ -653,7 +653,7 @@ Note:
 
 Note:
 * has access to old and new props + state
-* Also updates when same props are passed
+* Also is called when same props are passed
 * Example: drawing `canvas` circle when perecentage changed
 * Can be compared to onChanges in Angular
 ----
@@ -687,12 +687,14 @@ Note:
 
 ### componentWillUpdate()
 
-* Immediately called before rendering
+* Immediately called *before* rendering
 * Can call **setState**: **No**.
 ----
 
 ### componentDidUpdate()
 
+* Immediately called *after* rendering
+* Can be used for new network requests or interacting with DOM
 * Can call **setState**: **Yes**.
 ----
 
@@ -730,11 +732,98 @@ Note:
 ![alt Lifecycle methods](https://cdn-images-1.medium.com/max/1600/1*u8hTumGAPQMYZIvfgQMfPA.jpeg)
 ---
 
-## Styling
-* Global
-* Component-based (css-modules)
-* Inline
----
+## Styling components
+Note:
+* There are tons of plugins and ways how to style, here are some of the most common ones
+----
+
+### One stylesheet
+* Just reference a global stylesheet as usual
+* **Not** recommended. Only use for very small projects (confusing / component context gets lost)
+----
+
+### Stylesheet per component
+* Just import plain stylesheet in your component:
+  ```javascript
+  import './style.css';
+  
+  ...
+
+  render() {
+    <div className="box">Just a styled box.</div>
+  }
+  ```
+* **Good**: clear component context
+* **Bad**: still global styles
+----
+
+### Inline
+* Javascript objects
+* *camelCase* styles
+```javascript
+const boxStyle = {
+    width: '100%',
+    boxShadow: '0 2px 4px black'
+}
+render() {
+    <div style={boxStyle}>Just a styled box.</div>
+}
+```
+* **Good**: local styles
+* **Bad**: bad performance, ugly code, hard to maintain
+
+Note:
+* Inline styles only support a subset of CSS. Putting your styles inline into the DOM means you cannot use pseudo selectors, media queries, keyframes etc. (because the browser doesn’t recognise those things) | Max Stoiber 2016
+----
+
+### CSS Modules ([Demo](https://css-modules.github.io/webpack-demo/))
+* Local styles by default
+```javascript
+  import styles from './ScopedSelectors.css';
+  import React from 'react';
+
+  export default class ScopedSelectors extends React.Component {
+
+    render() {
+      return (
+        <div className={ styles.root }>
+          <p className={ styles.text }>Scoped Selectors</p>
+        </div>
+      );
+    }
+
+  };
+```
+* Global is optional
+----
+
+### CSS-in-JS
+* Mix of CSS Modules and Inline styles
+```javascript
+  import { StyleSheet, css } from 'aphrodite';
+
+  const styles = StyleSheet.create({
+    button: {
+      backgroundColor: 'palevioletred',
+      color: 'papayawhip',
+    },
+  });
+
+  <button className={css(styles.button)} />
+```
+* Output can be compared to CSS Modules
+----
+
+### Keep in mind
+* *React* has no opinion how to style components
+* Always use method that fits best to your project
+* Only load styles you need
+* Keep your styles maintainable
+* DRY
+
+Note:
+* In most cases just importing stylesheets per component (in combination with preprocessors) is totally sufficent
+----
 
 ## Routing using React-Router (v4)
 Note:
@@ -761,6 +850,8 @@ Note:
 * Universal JavaScript (one codebase for all)
   - allows server side rendering
   - doesn’t require client to enable JS
+* Great community that contributes to the project
+* Tons of free open-source components
 ---
 
 ## State management
@@ -780,6 +871,7 @@ Note:
   - Store
   - Actions
   - Dispatchers
+---
 
 ## Redux
 - One store replicating whole state tree
@@ -817,6 +909,7 @@ PART 3: FLUX (about 30 minutes) —> talk + discussions (OPTIONAL)
 * Flavio Copes: https://medium.freecodecamp.org/the-beginners-guide-to-react-9be65f50a55c
 * Scott Domes: https://engineering.musefind.com/react-lifecycle-methods-how-and-when-to-use-them-2111a1b692b1
 * Trey Huffine: https://levelup.gitconnected.com/componentdidmakesense-react-lifecycle-explanation-393dcb19e459
+* Max Stoiber: https://mxstbr.blog/2016/11/inline-styles-vs-css-in-js/
 
 TODO: React stastics of usage in projects; compare to other popular libraries and frameworks; why do people use it again?
 TODO: Explain create-react-app before coding session
