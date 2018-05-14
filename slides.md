@@ -626,6 +626,7 @@ Note:
 * Calling setState will not trigger extra rendering
 * React recommends to avoid any side-effects or subscriptions in this method
 * Use didMount instead
+* Only method called on the server
 * Can be compared to onInit in Angular
 ----
 
@@ -686,6 +687,7 @@ Note:
 
 ### componentWillUpdate()
 
+* Immediately called before rendering
 * Can call **setState**: **No**.
 ----
 
@@ -698,26 +700,41 @@ Note:
 
 * Invoked before removing component
 * Used for last cleanups
-	```javascript
-componentWillUnmount() {
-	window.removeEventListener('resize', this.resizeListener);
-}
-	```
+```javascript
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resizeListener);
+  }
+```
 * Can call **setState**: **No**.
 
 Note:
 * Can be compared to onDestroy in Angular
----
+* Example: (https://gist.github.com/treyhuffine/8728583fd2985bd0cab1dfa403ba49ec#file-react-16-error-boundary-example-jsx)
+----
+
+### componentDidCatch()
+
+* Prevents crashing whole application
+* Allows to display some fallback UI
+
+Note:
+* Only available since React 16
+----
 
 ### Conclusion
 
 * Ideally not used
+* Can be used for performance improvements
+----
+
+![alt Lifecycle methods](https://cdn-images-1.medium.com/max/1600/1*u8hTumGAPQMYZIvfgQMfPA.jpeg)
 ---
 
 ## React Example application consuming a API (DEMO)
 Note: 
 Show props and state changes in React developer tools
 ---
+
 
 ## Advantages of React:
 * Small / Simple / Modular
@@ -741,7 +758,7 @@ PART 2: Using React (about 20 - 30 minutes (+ evtl. 30 minutes) ) —> talk + di
 ---
 ## Styling
 * Global
-* Component-based
+* Component-based (css-modules)
 * Inline
 ---
 ## Routing using React-Router (v4)
@@ -780,7 +797,7 @@ Example using Redux
 * React docs: https://reactjs.org/docs
 * Flavio Copes: https://medium.freecodecamp.org/the-beginners-guide-to-react-9be65f50a55c
 * Scott Domes: https://engineering.musefind.com/react-lifecycle-methods-how-and-when-to-use-them-2111a1b692b1
+* Trey Huffine: https://levelup.gitconnected.com/componentdidmakesense-react-lifecycle-explanation-393dcb19e459
 
-
-TODO: React stastics of usage in projects; compare to other popular libraries and frameworks
+TODO: React stastics of usage in projects; compare to other popular libraries and frameworks; why do people use it again?
 TODO: Explain create-react-app before coding session
