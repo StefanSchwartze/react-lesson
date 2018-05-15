@@ -729,6 +729,12 @@ Note:
 * Can be used for performance improvements
 ----
 
+## Basic vs dumb vs smart
+---
+
+## High-order components (Optional)
+---
+
 ![alt Lifecycle methods](https://cdn-images-1.medium.com/max/1600/1*u8hTumGAPQMYZIvfgQMfPA.jpeg)
 ---
 
@@ -823,18 +829,122 @@ Note:
 
 Note:
 * In most cases just importing stylesheets per component (in combination with preprocessors) is totally sufficent
-----
+---
 
 ## Routing using React-Router
 Note:
+* Feel free to use your own implementation
+* React-Router is most popular
 * Be careful on Stackoverflow with old versions (<v4)
----
+----
 
-## Basic vs dumb vs smart
----
+### Installation
 
-## High-order components (Optional)
----
+React Router exposes **3** packages:
+* `react-router`, `react-router-dom`, `react-router-native`
+```shell
+yarn add react-router-dom
+```
+----
+
+### Rendering a Router
+```javascript
+import { BrowserRouter } from 'react-router-dom'
+ReactDOM.render((
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+), document.getElementById('root'))
+
+const App = () => (
+  <div>
+    <Header />
+    <Main />
+  </div>
+)
+```
+* **One** child allowed only
+* **`MemoryRouter`** for serverside usage
+----
+
+### Routes
+```javascript
+const Main = () => (
+  <main>
+    <Route path="/" exact component={Home} />
+    <Route path="/posts" component={Posts} />
+  </main>
+)
+```
+* No central route file
+* Routing can be nested in every Router's child component
+* `exact` - will be default in v5
+----
+
+### Exclusive routing
+```javascript
+import { Switch, Route } from 'react-router-dom'
+const Main = () => (
+  <main>
+    <Switch>
+      <Route path="/" exact component={Home} />
+      <Route path="/posts" component={Posts} />
+      <Redirect to="/" />
+    </Switch>
+  </main>
+)
+```
+Note:
+* Redirect can be used for 404 pages e.g.
+----
+
+### Nested routes
+```javascript
+import { Switch, Route } from 'react-router-dom'
+const Posts = () => (
+    <Switch>
+      <Route path="/posts" exact component={PostsList} />
+      <Route path="/posts/:postId" component={PostDetail} />
+    </Switch>
+)
+```
+Note:
+* Redirect can be used for 404 pages e.g.
+----
+### History
+
+* `history` object contains all information about current location
+```javascript
+// a basic location object
+{ 
+    pathname: '/', 
+    search: '',
+    hash: '',
+    key: 'abc123'
+    state: {
+      modalOpen: true
+    } 
+}
+```
+Note:
+* A React Router component that does not have a router as one of its ancestors will fail to work.
+----
+
+### Navigating through history
+* Push
+```
+history.push({ pathname: '/new-place' })
+```
+* Replace (good for redirects)
+```
+history.replace({ pathname: '/go-here-instead' })
+```
+* Let's go everywhere:
+```
+history.go(-3)
+history.goBack()
+```
+----
 
 ## React developer tools
 Note: 
@@ -878,7 +988,7 @@ Note:
 - One store replicating whole state tree
 - Does not mutate the state, always creates a new one 
 - Allows time-traveling
-- Easy testable
+- Easy testable (each state can be reproduced)
 ---
 
 ## MobX
@@ -922,6 +1032,7 @@ PART 3: FLUX (about 30 minutes) —> talk + discussions (OPTIONAL)
 * Scott Domes: https://engineering.musefind.com/react-lifecycle-methods-how-and-when-to-use-them-2111a1b692b1
 * Trey Huffine: https://levelup.gitconnected.com/componentdidmakesense-react-lifecycle-explanation-393dcb19e459
 * Max Stoiber: https://mxstbr.blog/2016/11/inline-styles-vs-css-in-js/
+* Paul Sherman: https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf
 
 TODO: React statistics of usage in projects; compare to other popular libraries and frameworks; why do people use it again?
 TODO: Explain create-react-app before coding session
