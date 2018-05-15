@@ -546,7 +546,7 @@ React
 ```
 ----
 
-#### Keys / trackBy
+#### Keys vs. trackBy
 
 Angular
 ```
@@ -825,20 +825,21 @@ Note:
 * In most cases just importing stylesheets per component (in combination with preprocessors) is totally sufficent
 ----
 
-## Routing using React-Router (v4)
+## Routing using React-Router
 Note:
-* Be careful on Stackoverflow with old versions
+* Be careful on Stackoverflow with old versions (<v4)
 ---
 
-## Basic vs dumb vs smart components
+## Basic vs dumb vs smart
+---
+
+## High-order components (Optional)
 ---
 
 ## React developer tools
 Note: 
 * Show props and state changes in React developer tools
----
-
-## Create React app
+* TODO: Example pages
 ---
 
 ## Advantages of React:
@@ -896,8 +897,19 @@ Note:
 - The one you are more familiar with
 ---
 
-## Coding a React application / Hands-On
+### Hands on your keyboard
+* Be sure **Node >= 6** is installed
+* Get started:
+```bash
+  npx create-react-app my-app
+  cd my-app
+  npm start
+```
+* Use React developer tools for debugging
 ----
+
+### Task I
+
 
 Note:
 PART 2: Using React (about 20 - 30 minutes (+ evtl. 30 minutes) ) —> talk + discussions (+ eventually Hands On with coding)
@@ -911,5 +923,5 @@ PART 3: FLUX (about 30 minutes) —> talk + discussions (OPTIONAL)
 * Trey Huffine: https://levelup.gitconnected.com/componentdidmakesense-react-lifecycle-explanation-393dcb19e459
 * Max Stoiber: https://mxstbr.blog/2016/11/inline-styles-vs-css-in-js/
 
-TODO: React stastics of usage in projects; compare to other popular libraries and frameworks; why do people use it again?
+TODO: React statistics of usage in projects; compare to other popular libraries and frameworks; why do people use it again?
 TODO: Explain create-react-app before coding session
