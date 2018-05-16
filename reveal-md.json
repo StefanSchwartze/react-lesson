@@ -1,6 +1,6 @@
 {
     "title": "React lesson",
-    "theme": "custom-theme",
+    "theme": "slides-theme",
     "template": "reveal.html",
-    "highlightTheme": "react-docs"
+    "highlightTheme": "code-theme"
 }
