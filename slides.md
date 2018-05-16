@@ -887,8 +887,8 @@ import { Switch, Route } from 'react-router-dom'
 const Main = () => (
   <main>
     <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/posts" component={Posts} />
+      <Route path="/" exact component={HomePage} />
+      <Route path="/posts" component={PostsPage} />
       <Redirect to="/" />
     </Switch>
   </main>
@@ -901,16 +901,57 @@ Note:
 ### Nested routes
 ```javascript
 import { Switch, Route } from 'react-router-dom'
-const Posts = () => (
+const PostsPage = props => (
     <Switch>
       <Route path="/posts" exact component={PostsList} />
       <Route path="/posts/:postId" component={PostDetail} />
     </Switch>
 )
 ```
-Note:
-* Redirect can be used for 404 pages e.g.
 ----
+
+### Match
+* `match` object provided in props
+
+* url — the matched part of the current location’s pathname
+* path — the route’s path (without any params etc.)
+* isExact — path === pathname
+* params — an object containing values from the pathname that were captured by path-to-regexp
+
+Note:
+* Difference between url and path: url contains matched string, path contains params
+----
+
+### Using path from match
+```javascript
+import { Switch, Route } from 'react-router-dom'
+const PostsPage = props => (
+    <Switch>
+      <Route path={props.match.path} exact component={PostsList} />
+      <Route path={`${props.match.path}/:postId`} component={PostDetail} />
+    </Switch>
+)
+```
+----
+
+### Using params from match
+```javascript
+// an API that returns a post object
+import postAPI from './postAPI'
+const post = props => {
+  const post = postAPI.get(props.match.params.postId);
+  if (!post) {
+    return <div>Sorry, but the post was not found</div>
+  }
+  return (
+    <div>
+      <h1>{post.title}</h1>
+      <p>{post.content}</p>
+    </div>
+)
+```
+----
+
 ### History
 
 * `history` object contains all information about current location
@@ -930,7 +971,7 @@ Note:
 * A React Router component that does not have a router as one of its ancestors will fail to work.
 ----
 
-### Navigating through history
+### Navigating programmatically
 * Push
 ```
 history.push({ pathname: '/new-place' })
@@ -945,6 +986,9 @@ history.go(-3)
 history.goBack()
 ```
 ----
+
+### Navigating with Links
+---
 
 ## React developer tools
 Note: 
