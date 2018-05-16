@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <title>{{title}}</title>
     <link rel="stylesheet" href="{{{base}}}/css/reveal.css">
-    <link rel="stylesheet" href="{{{themeUrl}}}" id="theme">
-    <link rel="stylesheet" href="{{{highlightThemeUrl}}}">
+    <link rel="stylesheet" href="{{{base}}}/{{theme}}.css" id="theme">
+    <link rel="stylesheet" href="{{{base}}}/{{highlightTheme}}.css">
     <link rel="stylesheet" href="{{{base}}}/css/print/{{#print}}pdf{{/print}}{{^print}}paper{{/print}}.css" type="text/css" media="print"> {{#cssPaths}}
     <link rel="stylesheet" href="{{{base}}}/{{{.}}}"> {{/cssPaths}} {{#watch}}
     <script>
@@ -43,12 +43,13 @@
             { src: '{{{base}}}/lib/js/classList.js', condition: function () { return !document.body.classList; } },
             { src: '{{{base}}}/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
             { src: '{{{base}}}/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-            { src: '{{{base}}}/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
             { src: '{{{base}}}/plugin/zoom-js/zoom.js', async: true },
             { src: '{{{base}}}/plugin/notes/notes.js', async: true },
             { src: '{{{base}}}/plugin/math/math.js', async: true },
+            { src: 'node_modules/prismjs/prism.js', async: true },
+            { src: 'node_modules/prismjs/components/prism-jsx.min.js', async: true },
             { src: 'node_modules/reveal.js-menu/menu.js', async: true },
-            { src: 'node_modules/reveal.js-toolbar/toolbar.js', async: true }
+            { src: 'node_modules/reveal.js-toolbar/toolbar.js', async: true },
         ];
 
         // default options to init reveal.js

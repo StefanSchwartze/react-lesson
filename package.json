@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/StefanSchwartze/react-lesson#readme",
   "dependencies": {
+    "prismjs": "^1.14.0",
     "reveal-md": "^1.1.3",
     "reveal.js-menu": "^1.0.0",
     "reveal.js-toolbar": "^0.1.4"

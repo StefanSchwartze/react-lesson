@@ -1,4 +1,6 @@
 {
     "title": "React lesson",
-    "theme": "night"
+    "theme": "custom-theme",
+    "template": "reveal.html",
+    "highlightTheme": "react-docs"
 }

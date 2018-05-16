@@ -19,7 +19,7 @@ Note:
 ----
 ### JSX (JavaScript XML)
 ----
-``` javascript
+```jsx
 const element = <h1>Hello, world!</h1>;
 ```
 * **Looks like**: HTML mixed with JavaScript 
@@ -30,7 +30,7 @@ Note:
 * Usually compiled within transpilers like Babel
 ----
 #### Inserting strings
-``` javascript
+```jsx
 const text = 'Hello, world!';
 const element = <h1>{text}</h1>;
 ```
@@ -51,11 +51,11 @@ Note:
 
 ##### JSX ~~required~~
 <br/>
-``` javascript
+```jsx
 const element = <h1 className="greeting">Hello, world!</h1>;
 ```
 _equals to_
-``` javascript
+```jsx
 const element = React.createElement(
   'h1',
   {className: 'greeting'},
@@ -68,7 +68,7 @@ Note:
 
 ### Output:
 
-``` javascript
+```jsx
 const element = {
   type: 'h1',
   props: {
@@ -83,12 +83,12 @@ const element = {
 _attaching elements to the DOM_
 
 **HTML**
-```
+```markup
 <div id="root"></div>
 ```
 
 **JavaScript**
-``` javascript
+```jsx
 const element = <h1>Hello, world</h1>;
 ReactDOM.render(element, document.getElementById('root'));
 ```
@@ -111,13 +111,13 @@ TODO: Image of component tree!
 
 ### Creating a component
 
-```javascript
+```jsx
 const Welcome = (props) => { // Functional
   return <h1>Hello, {props.name}</h1>;
 }
 ```
 _equals to_
-```javascript
+```jsx
 class Welcome extends React.Component { // Class / Stateful
   render() {
     return <h1>Hello, {props.name}</h1>;
@@ -130,18 +130,18 @@ From React's point of view equal
 ### How to render a component
 <br/>
 **HTML element**:
-```javascript
+```jsx
 const element = <div />;
 ```
 
 **Component**:
-```javascript
+```jsx
 const element = <Welcome name="Sara" />;
 ```
 ----
 
 ### [Example](https://reactjs.org/redirect-to-codepen/components-and-props/rendering-a-component)
-```javascript
+```jsx
 const Welcome = (props) => {
   return <h1>Hello, {props.name}</h1>;
 }
@@ -171,7 +171,7 @@ Note:
 ----
 
 #### Passing props
-```javascript
+```jsx
 const desc = 'A description' 
 //... 
 <BlogPostExcerpt title="A blog post" description={desc} />
@@ -179,7 +179,7 @@ const desc = 'A description'
 ----
 #### Prop Types
 
-```javascript
+```jsx
 import PropTypes from 'prop-types'; 
 import React from 'react';
 class BlogPostExcerpt extends React.Component { 
@@ -216,13 +216,13 @@ Note:
 ----
 
 * Requiring properties
-```javascript
+```jsx
 PropTypes.arrayOf(PropTypes.string).isRequired
 PropTypes.string.isRequired
 ```
 
 * Default values for props
-```javascript
+```jsx
 BlogPostExcerpt.propTypes = { 
   title: PropTypes.string, 
   description: PropTypes.string 
@@ -236,13 +236,13 @@ BlogPostExcerpt.defaultProps = {
 
 #### Children
 
-```javascript
+```jsx
 <Welcome name="Max"> 
   <p>I'am a child!</p>
 </Welcome>
 ```
 Can be used with `this.props.children`:
-```javascript
+```jsx
 class Welcome extends Component { 
   render() { 
     return (
@@ -262,7 +262,7 @@ Note:
 * Can be modified by component
 ----
 #### Default state
-```javascript
+```jsx
 class BlogPostExcerpt extends Component {
   constructor(props) { 
     super(props);
@@ -287,12 +287,12 @@ Note:
 #### Mutating the state
 
 * State should **never** be mutated directly:
-```javascript
+```jsx
 this.state.clicked = true;
 ```
 
 * Instead use:
-```javascript
+```jsx
 this.setState({ clicked: true});
 ```
 
@@ -301,7 +301,7 @@ this.setState({ clicked: true});
 ----
 #### Converting a functional to a stateful component
 
-```javascript
+```jsx
 function Clock(props) {
   return (
     <div>
@@ -334,7 +334,7 @@ Note:
 ----
 #### Moving state up in the components tree
 
-```javascript
+```jsx
 class Converter extends React.Component { 
   constructor(props) { 
     super(props)
@@ -354,7 +354,7 @@ Note:
 * State will from now be maintained in parent component
 ----
 #### Mutating functions in props to talk to parent
-```javascript
+```jsx
 render() { 
   return (
     <CurrencySwitcher 
@@ -364,7 +364,7 @@ render() {
   )
 }
 ```
-```javascript
+```jsx
 const CurrencySwitcher = (props) => { 
   return ( 
     <button onClick={props.handleChangeCurrency}> 
@@ -388,7 +388,7 @@ Note:
 ```
 
 * **React**
-```javascript
+```jsx
 <button onClick={this.handleClick}> ... </button> 
 ```
 
@@ -401,7 +401,7 @@ Note:
 ### Handling events
 
 Best practice: **Handlers**
-```javascript
+```jsx
 class Button extends React.Component { 
 	handleClick(event) => { 
 		// do something
@@ -417,7 +417,7 @@ class Button extends React.Component {
 ----
 
 #### Methods not bound by default
-```javascript
+```jsx
 ...
 handleClick() => { 
 	console.log(this) // undefined
@@ -426,7 +426,7 @@ handleClick() => {
 ```
 
 Bind `this` in constructor:
-```javascript
+```jsx
 constructor(props) {
 	super(props);
 	// This binding is necessary to make `this` work in the callback
@@ -436,7 +436,7 @@ constructor(props) {
 ----
 
 #### New experimental syntax
-```javascript
+```jsx
 // This syntax ensures `this` is bound within handleClick.
 // Warning: this is *experimental* syntax.
 handleClick = () => {
@@ -448,7 +448,7 @@ Note:
 * Enabled in `create-react-app` by default
 ----
 #### Preventing default behaviour
-```javascript
+```jsx
 function ActionLink() {
   function handleClick(e) {
     e.preventDefault();
@@ -465,7 +465,7 @@ function ActionLink() {
 ----
 
 ### Conditions
-```javascript
+```jsx
 function Greeting(props) {
   if (props.isLoggedIn) {
     return <UserGreeting />;
@@ -483,7 +483,7 @@ Note:
 ----
 
 ### Lists
-```javascript
+```jsx
 function NumberList(props) {
   const numbers = props.numbers;
   const listItems = numbers.map((number) =>
@@ -520,7 +520,7 @@ Angular
 ```
 
 React
-```javascript
+```jsx
 <ul>
   {items.map(item => <li>{item.text}</li>)}
 </ul>
@@ -537,7 +537,7 @@ Angular
 ```
 
 React
-```javascript
+```jsx
 <ul>
   {items.map((item, i) => 
     <li>{i} {item.text}</li>
@@ -560,7 +560,7 @@ trackByFn(index, item) {
 ```
 
 React
-```javascript
+```jsx
 <ul>
   {items.map(item => 
     <li key={item.id}>{item.text}</li>
@@ -589,7 +589,7 @@ class FilterDone {
 ----
 
 React
-```javascript
+```jsx
 <ul>
   {items.filter({done} => done).map(item => 
     <li key={item.id}>{item.text}</li>
@@ -672,7 +672,7 @@ Note:
 ----
 
 #### Example
-```javascript
+```jsx
 shouldComponentUpdate(nextProps, nextState) {
 	return this.props.title !== nextProps.title || 
 				this.state.loading !== nextState.loading;
@@ -702,7 +702,7 @@ Note:
 
 * Invoked before removing component
 * Used for last cleanups
-```javascript
+```jsx
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeListener);
   }
@@ -750,7 +750,7 @@ Note:
 
 ### Stylesheet per component
 * Just import plain stylesheet in your component:
-  ```javascript
+  ```jsx
   import './style.css';
   
   ...
@@ -766,7 +766,7 @@ Note:
 ### Inline
 * Javascript objects
 * *camelCase* styles
-```javascript
+```jsx
 const boxStyle = {
     width: '100%',
     boxShadow: '0 2px 4px black'
@@ -784,7 +784,7 @@ Note:
 
 ### CSS Modules ([Demo](https://css-modules.github.io/webpack-demo/))
 * Local styles by default
-```javascript
+```jsx
   import styles from './ScopedSelectors.css';
   import React from 'react';
 
@@ -805,7 +805,7 @@ Note:
 
 ### CSS-in-JS
 * Mix of CSS Modules and Inline styles
-```javascript
+```jsx
   import { StyleSheet, css } from 'aphrodite';
 
   const styles = StyleSheet.create({
@@ -848,7 +848,7 @@ yarn add react-router-dom
 ----
 
 ### Rendering a Router
-```javascript
+```jsx
 import { BrowserRouter } from 'react-router-dom'
 ReactDOM.render((
   <BrowserRouter>
@@ -868,7 +868,7 @@ const App = () => (
 ----
 
 ### Routes
-```javascript
+```jsx
 const Main = () => (
   <main>
     <Route path="/" exact component={Home} />
@@ -882,7 +882,7 @@ const Main = () => (
 ----
 
 ### Exclusive routing
-```javascript
+```jsx
 import { Switch, Route } from 'react-router-dom'
 const Main = () => (
   <main>
@@ -899,7 +899,7 @@ Note:
 ----
 
 ### Nested routes
-```javascript
+```jsx
 import { Switch, Route } from 'react-router-dom'
 const PostsPage = props => (
     <Switch>
@@ -911,19 +911,19 @@ const PostsPage = props => (
 ----
 
 ### Match
-* `match` object provided in props
+`match` object is provided in props
 
-* url — the matched part of the current location’s pathname
-* path — the route’s path (without any params etc.)
-* isExact — path === pathname
-* params — an object containing values from the pathname that were captured by path-to-regexp
+* **url** — the matched part of the current location’s pathname
+* **path** — the route’s path (without any params etc.)
+* **isExact** — path === pathname
+* **params** — an object containing values from the pathname that were captured by path-to-regexp
 
 Note:
 * Difference between url and path: url contains matched string, path contains params
 ----
 
 ### Using path from match
-```javascript
+```jsx
 import { Switch, Route } from 'react-router-dom'
 const PostsPage = props => (
     <Switch>
@@ -935,7 +935,7 @@ const PostsPage = props => (
 ----
 
 ### Using params from match
-```javascript
+```jsx
 // an API that returns a post object
 import postAPI from './postAPI'
 const post = props => {
@@ -955,7 +955,7 @@ const post = props => {
 ### History
 
 * `history` object contains all information about current location
-```javascript
+```jsx
 // a basic location object
 { 
     pathname: '/', 
