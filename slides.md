@@ -938,7 +938,7 @@ const PostsPage = props => (
 ```jsx
 // an API that returns a post object
 import postAPI from './postAPI'
-const post = props => {
+const Post = props => {
   const post = postAPI.get(props.match.params.postId);
   if (!post) {
     return <div>Sorry, but the post was not found</div>
@@ -973,21 +973,52 @@ Note:
 
 ### Navigating programmatically
 * Push
-```
+```javascript
 history.push({ pathname: '/new-place' })
 ```
 * Replace (good for redirects)
-```
+```javascript
 history.replace({ pathname: '/go-here-instead' })
 ```
 * Let's go everywhere:
-```
+```javascript
 history.go(-3)
 history.goBack()
 ```
+Note:
+* `.push`and `.replace` accept same object like history provides
 ----
 
 ### Navigating with Links
+```jsx
+import { Link } from 'react-router-dom'
+const Header = () => (
+  <header>
+    <nav>
+      <ul>
+        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/posts'>Posts</Link></li>
+      </ul>
+    </nav>
+  </header>
+)
+```
+----
+
+### Add sugar with NavLink
+```jsx
+import { Link } from 'react-router-dom'
+const Header = () => (
+  <header>
+    <nav>
+      <ul>
+        <li><NavLink to='/' exact activeClassName="active">Home</NavLink></li>
+        <li><NavLink to='/posts' activeClassName="active">Posts</NavLink></li>
+      </ul>
+    </nav>
+  </header>
+)
+```
 ---
 
 ## React developer tools
