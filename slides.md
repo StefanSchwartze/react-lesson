@@ -1130,13 +1130,31 @@ Note:
 * Maintaining application state
 ----
 
-### 3 principles of Flux
-  - Stores
+### Principles of Flux
   - Actions
-  - Dispatchers
+  - Dispatcher
+  - Stores
+  - (View)
+----
 
 ### How does it work?
+![alt Flux concept simple](https://github.com/facebook/flux/raw/master/examples/flux-concepts/flux-simple-f8-diagram-with-client-action-1300w.png)
+*One-directional data flow*
+Note:
+General:
+* Action describes something that possibly changes some state
+* Dispatcher is a singleton that receives all actions and dispatches them to all registered stores
+* Stores save the state
+* View is React frontend and subsribes to Stores (possibly in componentDidMount)
 
+Data Flow:
+* View / user interaction triggers an action and sends it to dispatcher
+* Dispatchers sends the action to all stores that have been registered before
+* Store(s) then know what to do with data (and if to change the state)
+  * Must only be mutated by respnding to an action
+* All stores that have changed must emit an change event
+* View gets change event and re-renders with new data
+![alt Flux concept extended](https://github.com/facebook/flux/raw/master/docs/img/flux-diagram-white-background.png)
 ---
 
 ## Redux
@@ -1144,12 +1162,44 @@ Note:
 - One store replicating whole state tree
 - Does not mutate the state, always creates a new one 
 - Allows time-traveling
-- Easy testable (each state can be reproduced)
 ----
 
 ### Difference to Flux
 ![alt Flux vs. Redux](https://i.stack.imgur.com/HbS0b.jpg)
----
+----
+
+### Redux explained in Cartoon
+----
+
+### Action Creators
+----
+
+### *The* Store
+----
+
+### Reducers
+----
+
+### The View(s)
+----
+
+### The view layer binding
+----
+
+### Root component
+----
+
+### Setup
+1. Get the store ready
+----
+
+2. Set up the communication
+----
+
+3. Prepare action callbacks
+----
+
+
 
 ## MobX
 - Always mutates the state
@@ -1169,10 +1219,10 @@ Note:
 ----
 
 ### Do I need it?
-Depends. Start with setState.
-When bubbling along tree becomes too complicated, go!
+* Depends. Start with setState.
+* When bubbling along tree becomes **too** complicated, go!
+* Keep in mind: state management adds complexity!
 Note:
-* Keep in mind: state management adds complexity to your app!
 ---
 
 ### Hands on your keyboard
@@ -1208,6 +1258,8 @@ PART 3: FLUX (about 30 minutes) —> talk + discussions (OPTIONAL)
 * Max Stoiber: https://mxstbr.blog/2016/11/inline-styles-vs-css-in-js/
 * Paul Sherman: https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf
 * Brad Westfall: https://css-tricks.com/react-router-4/
+* Facebook: https://github.com/facebook/flux/tree/master/examples/flux-concepts
+* Lin Clark: https://code-cartoons.com/a-cartoon-intro-to-redux-3afb775501a6
 
 TODO: React statistics of usage in projects; compare to other popular libraries and frameworks; why do people use it again?
 TODO: Explain create-react-app before coding session
