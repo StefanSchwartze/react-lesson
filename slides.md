@@ -4,8 +4,14 @@ Stefan Schwartze
 
 ---
 
+## Before we start
+* All code examples are written in **ES6**
+* Code applies to React **v16**
+* Don't hesitate to directly ask for questions
+---
+
 ## About React
-* Library for creating interactive UIs
+* **Library** for creating interactive UIs
 * Created by Facebook in 2013
 * Goal: Splitting UI in different components
 Note:
@@ -36,7 +42,7 @@ const element = <h1>{text}</h1>;
 ```
 ----
 #### Inserting attributes
-```
+```jsx
 const uniqueId = 'unique';
 const element = <h1 id={uniqueId}>Hello, world!</h1>;
 ```  
@@ -138,11 +144,13 @@ const element = <div />;
 ```jsx
 const element = <Welcome name="Sara" />;
 ```
+Note: 
+* Components can be recognized by capitalizing
 ----
 
 ### [Example](https://reactjs.org/redirect-to-codepen/components-and-props/rendering-a-component)
 ```jsx
-const Welcome = (props) => {
+const Welcome = props => {
   return <h1>Hello, {props.name}</h1>;
 }
 
@@ -183,8 +191,8 @@ const desc = 'A description'
 import PropTypes from 'prop-types'; 
 import React from 'react';
 class BlogPostExcerpt extends React.Component { 
-  render() { 
-    return ( 
+  render() {
+    return (
       <div> 
         <h1>{this.props.title}</h1> 
         <p>{this.props.description}</p> 
@@ -213,6 +221,9 @@ Note:
 * `PropTypes.oneOf(['Test1', 'Test2'])`
 * `PropTypes.instanceOf(Something)`
 * `PropTypes.arrayOf(PropTypes.string)`
+
+Note:
+PropTypes are being removed in production build
 ----
 
 * Requiring properties
@@ -255,15 +266,15 @@ class Welcome extends Component {
 } 
 ```
 Note:
-* Doesn't work for functional components because class is missing
+* Doesn't work for functional components because component class is missing
 ----
 ### State
 * State stays internal
-* Can be modified by component
+* Can only be modified by component (not from outside)
 ----
 #### Default state
 ```jsx
-class BlogPostExcerpt extends Component {
+class BlogPostExcerpt extends React.Component {
   constructor(props) { 
     super(props);
     this.state = { clicked: false };
@@ -297,7 +308,8 @@ this.setState({ clicked: true});
 ```
 
 -> _Important to inform React about State changes_
-
+Note:
+* setState is asynchronous, callback can be used as 2nd parameter
 ----
 #### Converting a functional to a stateful component
 
@@ -435,7 +447,7 @@ constructor(props) {
 ```
 ----
 
-#### New experimental syntax
+#### New experimental syntax (ES7)
 ```jsx
 // This syntax ensures `this` is bound within handleClick.
 // Warning: this is *experimental* syntax.
@@ -460,7 +472,6 @@ function ActionLink() {
 ```
 ----
 
-
 ## JSX: Conditional rendering and lists
 ----
 
@@ -484,9 +495,8 @@ Note:
 
 ### Lists
 ```jsx
-function NumberList(props) {
-  const numbers = props.numbers;
-  const listItems = numbers.map((number) =>
+function NumberList({ numbers }) {
+  const listItems = numbers.map(number =>
     <li key={number.toString()}>
       {number}
     </li>
@@ -504,7 +514,7 @@ ReactDOM.render(
 ```
 [Codepen](https://codepen.io/gaearon/pen/jrXYRR?editors=0011)
 Note:
-* Show also with TodoList
+* TODO: Show also with TodoList
 ----
 
 ### Examples comparing Angular vs. React
@@ -976,7 +986,7 @@ const Header = () => (
 
 ### Add sugar with NavLink
 ```jsx
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 const Header = () => (
   <header>
     <nav>
@@ -1076,16 +1086,18 @@ const Button = withRouter(({ match, location, history }) => (
 ))
 ```
 Note:
-* Best: use a decorator with @withRouter
----
+* Best: use a decorator with @withRouter (ES7)
+* TODO: Codepen example!
+----
 
 ### Recap
 * Everything is a component / decentralized routing
-* `<BrowserRouter>`, `<Route>`, and <Link> are mostly used
+* `<BrowserRouter>`, `<Route>` and `<Link>` are mostly used
 * Programmatically navigate using `history.push()` etc.
 
 Note:
 * Layouts should keep that decentralized approach in mind
+---
 
 ## Advantages of React:
 * Small / Simple / Modular
@@ -1106,24 +1118,37 @@ Note:
 ----
 
 ### Using stores for UI state
+* Storing the state centralized
+* Subscribing to changes
 ---
 
 ## Flux
-* What is FLUX?
-* Maintaining application state
-* Just a pattern, no library
+----
 
-* Basic principles of FLUX:
-  - Store
+### What is Flux?
+* Just a pattern, no library
+* Maintaining application state
+----
+
+### 3 principles of Flux
+  - Stores
   - Actions
   - Dispatchers
+
+### How does it work?
+
 ---
 
 ## Redux
+- Inspired by Flux
 - One store replicating whole state tree
 - Does not mutate the state, always creates a new one 
 - Allows time-traveling
 - Easy testable (each state can be reproduced)
+----
+
+### Difference to Flux
+![alt Flux vs. Redux](https://i.stack.imgur.com/HbS0b.jpg)
 ---
 
 ## MobX
@@ -1136,10 +1161,18 @@ Note:
 - Multiple stores / one store
 - Object-oriented / functional
 - Easy getting started / much boilerplate code
+- No rollback / timetravel by default
 ----
 
 ### Which one is better?
-- The one you are more familiar with
+![alt Redux vs. MobX](https://image.slidesharecdn.com/makingreactpartofsomethinggreater-161031165748/95/making-react-part-of-something-greater-40-638.jpg?cb=1477933169)
+----
+
+### Do I need it?
+Depends. Start with setState.
+When bubbling along tree becomes too complicated, go!
+Note:
+* Keep in mind: state management adds complexity to your app!
 ---
 
 ### Hands on your keyboard
