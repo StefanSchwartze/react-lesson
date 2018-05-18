@@ -1176,26 +1176,57 @@ Data Flow:
 
 #### Action Creators
 ![alt Action Creators](https://cdn-images-1.medium.com/max/1200/1*Uljrrh4Z7UiUwk8AjUO9PA.png)
+Note:
+* Formats the action in a way the rest of the application can understand them
+* (Unlike Flux) Action creators in Redux do not send the action to the dispatcher. Instead, they return a formatted action object.
 ----
 
 #### *The* Store
 ![alt *The* Store](https://cdn-images-1.medium.com/max/1200/1*Gztc7THzxzOgJmGvJ95IQA.png)
+Note:
+* Holds the whole state tree (compared to Flux)
+* Delegates changing of state to root reducer
+* Dispatches itself the actions (no more dispatcher)
 ----
 
 #### Reducers
 ![alt Reducers](https://cdn-images-1.medium.com/max/1200/1*Vocy_6Gl9PbFlCIJsE9r3A.png)
+Note:
+* Takes the state from the store and slices it in different parts (single objects based on object key)
+* Passes the state parts to the corresponding reducers that know how to handle
+* They don't change original state but instead copy and modify that new state
+* All new slices are put together to new "state" object and then send to store
+* State tree can be compared to component hierarchy
 ----
 
 #### The View(s)
 ![alt The View(s)](https://cdn-images-1.medium.com/max/1200/1*TgCkFcjlD9SxSrMvVX3DrA.png)
+Note:
+Smart components
+* no own style, no DOM changes; 
+* Responsible for re-arranging dumb components
+* Pass functions to dumb components via props
+
+Dumb components
+* Only presentational components
+* Receive functions and execute them as callbacks
+* Advantage: can be re-used in different contexts
 ----
 
 #### The view layer binding
 ![alt The view layer binding](https://cdn-images-1.medium.com/max/1200/1*D1RcVrMV2rp6AH9hk5xZ8g.png)
+Note:
+* Responsible to connect view and store
+* Provider component: wrapped around whole tree to hook up connect() methods
+* connect(): when a dumb component wants to get updates, just wrap them in this function
+* selector: Function that describes which parts of state get connected to props
 ----
 
 #### Root component
 ![alt Root component](https://cdn-images-1.medium.com/max/1200/1*JXPeiNP-it60-QYKb-p2eQ.png)
+Note:
+* Top level of component hierarchy
+* Mostly setup work like creating store, binding reducers etc.
 ----
 
 ### Setup
