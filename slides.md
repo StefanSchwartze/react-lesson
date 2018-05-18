@@ -1157,10 +1157,12 @@ Data Flow:
 ![alt Flux concept extended](https://github.com/facebook/flux/raw/master/docs/img/flux-diagram-white-background.png)
 ---
 
+![alt Redux](https://kyleshevlin.com/wp-content/uploads/2016/11/redux_logo_2.png)
+----
 ## Redux
 - Inspired by Flux
-- One store replicating whole state tree
-- Does not mutate the state, always creates a new one 
+- **One** store replicating whole state tree
+- Does **not** mutate the state, always creates a new one 
 - Allows time-traveling
 ----
 
@@ -1169,49 +1171,136 @@ Data Flow:
 ----
 
 ### Redux explained in Cartoon
+*Credits: Lin Clark*
 ----
 
-### Action Creators
+#### Action Creators
+![alt Action Creators](https://cdn-images-1.medium.com/max/1200/1*Uljrrh4Z7UiUwk8AjUO9PA.png)
 ----
 
-### *The* Store
+#### *The* Store
+![alt *The* Store](https://cdn-images-1.medium.com/max/1200/1*Gztc7THzxzOgJmGvJ95IQA.png)
 ----
 
-### Reducers
+#### Reducers
+![alt Reducers](https://cdn-images-1.medium.com/max/1200/1*Vocy_6Gl9PbFlCIJsE9r3A.png)
 ----
 
-### The View(s)
+#### The View(s)
+![alt The View(s)](https://cdn-images-1.medium.com/max/1200/1*TgCkFcjlD9SxSrMvVX3DrA.png)
 ----
 
-### The view layer binding
+#### The view layer binding
+![alt The view layer binding](https://cdn-images-1.medium.com/max/1200/1*D1RcVrMV2rp6AH9hk5xZ8g.png)
 ----
 
-### Root component
+#### Root component
+![alt Root component](https://cdn-images-1.medium.com/max/1200/1*JXPeiNP-it60-QYKb-p2eQ.png)
 ----
 
 ### Setup
-1. Get the store ready
+#### 1. Get the store ready
+![alt 1. Get the store ready](https://cdn-images-1.medium.com/max/1600/1*8_fU31-jNQnQ0dp-wplm5w.png)
+Note:
+* Get the store ready. The root component creates the store, telling it what root reducer to use, using createStore(). This root reducer already has a team of reducers which report to it. It assembled that team of reducers using combineReducers().
 ----
 
-2. Set up the communication
+#### 2. Set up the communication
+![alt 2. Set up the communication](https://cdn-images-1.medium.com/max/1600/1*NYMutQLW8TcEgbO8VNeqHA.png)
+Note:
+* Set up the communication between the store and the components. The root component wraps its subcomponents with the provider component and makes the connection between the store and the provider.
+* The Provider creates what’s basically a network to update the components. The smart components connect to network using connect(). This ensures they’ll get state updates.
 ----
 
-3. Prepare action callbacks
+#### 3. Prepare action callbacks
+![alt 3. Prepare action callbacks](https://cdn-images-1.medium.com/max/1600/1*aVoD3gGddKUy3VCxwylthQ.png)
+Note:
+* Prepare the action callbacks. To make it easier for dumb components to work with actions, the smart components can setup action callbacks by using bindActionCreators(). This way, they can just pass down a callback to the dumb component. The action will be automatically dispatched after it is formatted.
 ----
 
+### Redux in action
+#### Incoming action
+![alt Incoming action](https://cdn-images-1.medium.com/max/1600/1*GNDs7SY53lEhp7mX8V25lw.png)
+Note:
+* Some user interaction causes an action
+----
 
+#### 1. View to action creator
+![alt View to action creator](https://cdn-images-1.medium.com/max/1600/1*p4EkWE_8upZ97Z0IapKDcQ.png)
+Note:
+* The view requests an action. The action creator formats it and returns it.
+----
 
+#### 2. Dispatching
+![alt Dispatching](https://cdn-images-1.medium.com/max/1600/1*zmFp3bmDq7b6Bvlo8Ineag.png)
+Note:
+* The action is either dispatched automatically (if bindActionCreators() was used in setup), or the view dispatches the action.
+----
+
+#### 3. Store to reducer
+![alt Store to reducer](https://cdn-images-1.medium.com/max/1600/1*zrsSoAAyf4pqTMHiA6P8Ww.png)
+Note:
+* The store receives the action. It sends the current state tree and the action to the root reducer.
+----
+
+#### 4. Root reducer to subreducers
+![alt Root reducer to subreducers](https://cdn-images-1.medium.com/max/1600/1*-S_dYe6BoQBgwSRpF7Hriw.png)
+Note:
+* The root reducer cuts apart the state tree into slices. 
+* Then it passes each slice to the subreducer that knows how to deal with it.
+----
+
+#### 5. Creating new modified state
+![alt Creating new modified state](https://cdn-images-1.medium.com/max/1600/1*_R-rGNfKr2Xu2FlXNZNPJg.png)
+Note:
+* The subreducer copies the slice and makes changes to the copy. It returns the copy of the slice to the root reducer.
+----
+
+#### 6. Pasting all together
+![alt Pasting all together](https://cdn-images-1.medium.com/max/1600/1*bUMekI8QlEfFxSBCuVuIkw.png)
+Note:
+* Once all of the subreducers have returned their slice copies, the root reducer pastes all of them together to form the whole updated state tree, which it returns to the store.
+* The store replaces the old state tree with the new one.
+----
+
+#### 7. Store emits change
+![alt Store emits change](https://cdn-images-1.medium.com/max/1600/1*x6vBvUlFJktJqty56jr0QQ.png)
+Note:
+* The store tells the view layer binding that there’s new state.
+----
+
+#### 8. State request
+![alt State request](https://cdn-images-1.medium.com/max/1600/1*qGatznV4QujuxGe49YfX5A.png)
+Note:
+* The view layer binding asks the store to send over the new state.
+----
+
+#### 9. Re-rendering
+![alt Re-rendering](https://cdn-images-1.medium.com/max/1600/1*Je2mow8mjYLngXreGGlIEg.png)
+Note:
+* The view layer binding triggers a rerender.
+----
+
+### Wrapping it all up
+- Less magic, more boilerplate
+- Pure / functional programming
+- Saving state allows TT and HR
+---
+
+ ![alt MobX](https://seeklogo.com/images/M/mobx-logo-0C59CBBAD9-seeklogo.com.png)
 ## MobX
 - Always mutates the state
 - Really easy setup
 ---
 
 ## MobX vs. Redux
-- Mutable / immutable
-- Multiple stores / one store
-- Object-oriented / functional
-- Easy getting started / much boilerplate code
-- No rollback / timetravel by default
+MobX | Redux
+--- | ---
+Mutable | Immutable
+Multiple stores | One store
+Object-oriented | Functional
+Easy getting started | Much boilerplate code
+No rollback | Timetravel by default
 ----
 
 ### Which one is better?
