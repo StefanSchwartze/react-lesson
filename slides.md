@@ -1313,15 +1313,64 @@ Note:
 ----
 
 ### Wrapping it all up
-- Less magic, more boilerplate
+- Little magic, large boilerplate
 - Pure / functional programming
 - Saving state allows TT and HR
 ---
 
  ![alt MobX](https://seeklogo.com/images/M/mobx-logo-0C59CBBAD9-seeklogo.com.png)
 ## MobX
-- Always mutates the state
+----
+
+### Philosophy
+
+> "Anything that can be derived from the application state, should be derived. Automatically."
+Note:
+* MobX wants to provide state changes to you
+----
+
+### How?
+
+
+----
+
+> "Both React and MobX provide [...] mechanisms to optimally render UI by using a virtual DOM that reduces the number of costly DOM mutations. MobX [..] optimally synchronize application state with [...] virtual dependency state graph that is only updated when strictly needed and is never stale."
+--- MobX docs
+Note:
+* MobX exactly wants to know where state is required therefore it can update
+* Not only for React
+----
+
+### Mobx Core Concepts
+----
+<!-- .slide: data-background-image="https://mobx.js.org/docs/flow.png" data-background-size="contain"-->
+Note:
+* Actions
+* State
+* Computed values
+* Reactions
+----
+
+### [Todo example](https://reactjs.org/redirect-to-codepen/rendering-elements/update-rendered-element)
+----
+
+### MobX is watching you(r components)
+* Add **@observer** and you're fine
+* comes with optimized `shouldComponentUpdate`
+Note:
+* Only props accessed in `render()` method will be observed correctly
+----
+
+### *Should I use observer for each component?*
+## [Yes](https://github.com/mobxjs/mobx-react#faq).
+(for all components that consume observables)
+----
+
+
+### Recap
 - Really easy setup
+- Working with **Actions**, **Computed** values and **Reactions**
+- Always mutates the state
 ---
 
 ## MobX vs. Redux
@@ -1364,11 +1413,6 @@ Note:
 
 ### Task I
 
-
-Note:
-PART 2: Using React (about 20 - 30 minutes (+ evtl. 30 minutes) ) —> talk + discussions (+ eventually Hands On with coding)
-PART 3: FLUX (about 30 minutes) —> talk + discussions (OPTIONAL)
-
 ## Sources
 
 * React docs: https://reactjs.org/docs
@@ -1383,3 +1427,4 @@ PART 3: FLUX (about 30 minutes) —> talk + discussions (OPTIONAL)
 
 TODO: React statistics of usage in projects; compare to other popular libraries and frameworks; why do people use it again?
 TODO: Explain create-react-app before coding session
+TODO: Add best practices to all sections
