@@ -1326,39 +1326,83 @@ Note:
 
 > "Anything that can be derived from the application state, should be derived. Automatically."
 Note:
-* MobX wants to provide state changes to you
+* MobX wants to provide state changes to you automatically
 ----
 
 ### How?
-
-
+* "MobX Core Concepts"
 ----
 
-> "Both React and MobX provide [...] mechanisms to optimally render UI by using a virtual DOM that reduces the number of costly DOM mutations. MobX [..] optimally synchronize application state with [...] virtual dependency state graph that is only updated when strictly needed and is never stale."
---- MobX docs
+### Observable state
+* Minimal, non-redundant
+
+```javascript
+import { observable } from "mobx"
+
+class Todo {
+    id = Math.random();
+    @observable title = "";
+    @observable finished = false;
+}
+```
+----
+
+### Computed values
+* Can be derived automatically
+
+```javascript
+class TodoList {
+    @observable todos = [];
+    @computed get unfinishedTodoCount() {
+        return this.todos.filter(todo => !todo.finished).length;
+    }
+}
+```
+----
+
+### Actions
+* Should be only way to modify the state
+```javascript
+store.todos.push(new Todo("Write simpler code"));
+```
+----
+
+### Reactions
+* Produces *side effects*, not values
+
+```javascript
+todos[0].finished = true;
+autorun(() => {
+    console.log("Tasks left: " + todos.unfinishedTodoCount)
+})
+```
+* *MobX reacts to any existing observable property that is read during the execution of a tracked function*
 Note:
-* MobX exactly wants to know where state is required therefore it can update
 * Not only for React
 ----
 
-### Mobx Core Concepts
+#### MobX is watching your components
+* Add **@observer** and you're fine
+* includes optimized **`shouldComponentUpdate`**
+* [Example](https://codesandbox.io/s/v3v0my2370)
+Note:
+* MobX exactly wants to know where state is required therefore it can update
+* Only props accessed in `render()` method will be observed correctly
+* Add another component in example to show observer
+----
+
+### Wrapping up
 ----
 <!-- .slide: data-background-image="https://mobx.js.org/docs/flow.png" data-background-size="contain"-->
 Note:
+* Observable state
 * Actions
-* State
 * Computed values
 * Reactions
 ----
-
-### [Todo example](https://reactjs.org/redirect-to-codepen/rendering-elements/update-rendered-element)
-----
-
-### MobX is watching you(r components)
-* Add **@observer** and you're fine
-* comes with optimized `shouldComponentUpdate`
+### [Todo example in action](https://jsfiddle.net/mweststrate/wv3yopo0/)
 Note:
-* Only props accessed in `render()` method will be observed correctly
+TODO: Update to newest version
 ----
 
 ### *Should I use observer for each component?*
@@ -1366,11 +1410,52 @@ Note:
 (for all components that consume observables)
 ----
 
+#### (Does it react or not?)
+----
+
+### Provider and inject
+* Used to inject stores at everywhere
+* No more need to pass them down
+----
+
+### Asynchronous actions
+----
+
+#### Using Promises
+```javascript
+class Store {
+  @observable githubProjects = []
+  @observable state = "pending" // "pending" / "done" / "error"
+
+  @action fetchProjects() {
+    this.githubProjects = []
+    this.state = "pending"
+    fetchGithubProjectsSomehow().then(
+      projects => {
+        const filteredProjects = somePreprocessing(projects)
+        this.githubProjects = filteredProjects
+        this.state = "done"
+      },
+      error => {
+        this.state = "error"
+      }
+    )
+  }
+}
+```
+<!-- .element: class="stretch" -->
+----
+
+#### Using aysnc / await
+----
 
 ### Recap
 - Really easy setup
 - Working with **Actions**, **Computed** values and **Reactions**
 - Always mutates the state
+
+### Bonus: TypeScript ftw
+* MobX is written in TS
 ---
 
 ## MobX vs. Redux
@@ -1424,6 +1509,11 @@ Note:
 * Brad Westfall: https://css-tricks.com/react-router-4/
 * Facebook: https://github.com/facebook/flux/tree/master/examples/flux-concepts
 * Lin Clark: https://code-cartoons.com/a-cartoon-intro-to-redux-3afb775501a6
+* Michael Westrate:
+  * https://hackernoon.com/becoming-fully-reactive-an-in-depth-explanation-of-mobservable-55995262a254
+  * https://mobx.js.org/
+* Gupta Garuda: https://hackernoon.com/introduction-to-redux-and-mobx-e6fa98b6479
+* 
 
 TODO: React statistics of usage in projects; compare to other popular libraries and frameworks; why do people use it again?
 TODO: Explain create-react-app before coding session
