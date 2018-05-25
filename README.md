@@ -16,3 +16,5 @@ To run the presentation, type:
 ```bash
 $ reveal-md slides.md
 ```
+
+To read them without sugar, click [here](slides.md).
