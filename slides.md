@@ -112,8 +112,9 @@ Note:
 * Can be nested to each other
 
 ![alt Example structure of a blogging platform](https://cdn-images-1.medium.com/max/1600/0*4p1fVzn0x6rh6kL9.png)
+Note:
+* TODO: Image of component tree!
 ----
-TODO: Image of component tree!
 
 ### Creating a component
 
@@ -749,9 +750,167 @@ Note:
 * TODO
 ---
 
-## High-order components (Optional)
+## Higher-Order components
+Technique for reusing logic
+----
+
+> "Concretely, a higher-order component is a function that takes a component and returns a new component." - React docs
+
+```jsx
+const EnhancedComponent = higherOrderComponent(WrappedComponent);
+```
+----
+
+```jsx
+class CommentList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      // "DataSource" is some global data source
+      comments: DataSource.getComments()
+    };
+  }
+
+  componentDidMount() {
+    // Subscribe to changes
+    DataSource.addChangeListener(this.handleChange);
+  }
+
+  componentWillUnmount() {
+    // Clean up listener
+    DataSource.removeChangeListener(this.handleChange);
+  }
+
+  handleChange() {
+    // Update component state whenever the data source changes
+    this.setState({
+      comments: DataSource.getComments()
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        {this.state.comments.map((comment) => (
+          <Comment comment={comment} key={comment.id} />
+        ))}
+      </div>
+    );
+  }
+}
+```
+<!-- .element: class="stretch" -->
+----
+
+```jsx
+class BlogPost extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      blogPost: DataSource.getBlogPost(props.id)
+    };
+  }
+
+  componentDidMount() {
+    DataSource.addChangeListener(this.handleChange);
+  }
+
+  componentWillUnmount() {
+    DataSource.removeChangeListener(this.handleChange);
+  }
+
+  handleChange() {
+    this.setState({
+      blogPost: DataSource.getBlogPost(this.props.id)
+    });
+  }
+
+  render() {
+    return <TextBlock text={this.state.blogPost} />;
+  }
+}
+```
+<!-- .element: class="stretch" -->
+----
+
+### Common functionality
+* On mount, add a change listener to `DataSource`.
+* Inside the listener, call `setState` whenever the data source changes.
+* On unmount, remove the change listener.
+----
+
+### Reuse!
+```jsx
+const CommentListWithSubscription = withSubscription(
+  CommentList,
+  (DataSource) => DataSource.getComments()
+);
+
+const BlogPostWithSubscription = withSubscription(
+  BlogPost,
+  (DataSource, props) => DataSource.getBlogPost(props.id)
+);
+```
 Note:
-* TODO
+* `withSubscription` is a simple function with 2 arguments
+* 1st is wrapped component, 2nd describes the data
+----
+
+### How?
+```jsx
+// This function takes a component...
+function withSubscription(WrappedComponent, selectData) {
+  // ...and returns another component...
+  return class extends React.Component {
+    constructor(props) {
+      super(props);
+      this.handleChange = this.handleChange.bind(this);
+      this.state = {
+        data: selectData(DataSource, props)
+      };
+    }
+
+    componentDidMount() {
+      // ... that takes care of the subscription...
+      DataSource.addChangeListener(this.handleChange);
+    }
+
+    componentWillUnmount() {
+      DataSource.removeChangeListener(this.handleChange);
+    }
+
+    handleChange() {
+      this.setState({
+        data: selectData(DataSource, this.props)
+      });
+    }
+
+    render() {
+      // ... and renders the wrapped component with the fresh data!
+      // Notice that we pass through any additional props
+      return <WrappedComponent data={this.state.data} {...this.props} />;
+    }
+  };
+}
+```
+<!-- .element: class="stretch" -->
+----
+
+### Keep in mind
+**HOC**s should be:
+* simple to use
+* don't require a manual
+* help implementing *DRY*
+
+**HOC**s only work with classes
+----
+
+### Try it out!
+* Implementing a reversable heading
+* [Sandbox: Higher-Order component START](https://codesandbox.io/s/6w2owlzxo3)
+* [Sandbox: Higher-Order component FINAL](https://codesandbox.io/s/q8m9qq4v86)
 ---
 
 ## Styling components
