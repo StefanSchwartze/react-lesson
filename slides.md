@@ -168,7 +168,7 @@ Note:
 * React DOM efficiently updates the DOM to match <h1>Hello, Sara</h1>.
 ----
 
-### Functional vs stateless vs stateful components
+### Component types
 * **Functional**: simple JavaScript functions
 * **Stateless**: only render props received from outside
 * **Stateful**: manage internal state
@@ -207,9 +207,8 @@ BlogPostExcerpt.propTypes = {
 }; 
 export default BlogPostExcerpt;
 ```
-Note:
-* TODO: Codepen example with default props etc.
 ----
+
 **Possible types**
 
 * `PropTypes.array`
@@ -224,7 +223,7 @@ Note:
 * `PropTypes.arrayOf(PropTypes.string)`
 
 Note:
-PropTypes are being removed in production build
+* PropTypes are being removed in production build
 ----
 
 * Requiring properties
@@ -333,7 +332,12 @@ function tick() {
 
 setInterval(tick, 1000);
 ```
-[Codepen](http://codepen.io/gaearon/pen/dpdoYR?editors=0010)
+----
+
+### Try it out!
+* Convert functional to stateful component
+* [Sandbox: React setState START](https://codesandbox.io/s/0o9j58wv0n)
+* [Sandbox: React setState FINAL](https://codesandbox.io/s/y0xxlzlp81)
 ----
 
 ### Unidirectional data flow
@@ -383,12 +387,10 @@ const CurrencySwitcher = (props) => {
     <button onClick={props.handleChangeCurrency}> 
       Current currency is {props.currency}. Change it! 
     </button> 
-  ) 
+  )
 }
 ```
-[Codepen 1](https://codepen.io/anon/pen/XEpoqO?editors=0010)
-[Codepen 2](https://codepen.io/gaearon/pen/WZpxpz?editors=0010)
-
+[Codepen](https://codepen.io/anon/pen/XEpoqO?editors=0010)
 Note:
 * handlers can be compared to Angulars Output
 ----
@@ -473,6 +475,12 @@ function ActionLink() {
 ```
 ----
 
+### Try it out!
+* Implement two fields and change scale based by current input
+* [Sandbox: Unidirectional dataflow START](https://codesandbox.io/s/q99kx7p10q)
+* [Sandbox: Unidirectional dataflow FINAL](https://codesandbox.io/s/q99kx7p10q)
+----
+
 ## JSX: Conditional rendering and lists
 ----
 
@@ -514,8 +522,6 @@ ReactDOM.render(
 );
 ```
 [Codepen](https://codepen.io/gaearon/pen/jrXYRR?editors=0011)
-Note:
-* TODO: Show also with TodoList
 ----
 
 ### Examples comparing Angular vs. React
@@ -611,17 +617,17 @@ React
 [Codepen](https://codepen.io/gaearon/pen/NRZYGN?editors=0010)
 ----
 
-* **Always** use keys to avoid re-rendering
-* **Don't** use index: can cause problems with sorting; is used by default
-* **Use** plain JS functions for conditions and loops
-
-Note:
 Use case | Angular | React
 --- | --- | ---
 Conditions | *ngIf / else / then | a ? b : c (pure JS)
 Loops | *ngFor | .map, .forEach ...
 Indexing | trackByFn | key = ...
 Reduce, filter | Custom func. | JS
+----
+
+* **Always** use keys to avoid re-rendering
+* **Don't** use index: can cause problems with sorting; is used by default
+* **Use** plain JS functions for conditions and loops
 ---
 
 ## React lifecycle methods
@@ -743,11 +749,6 @@ Note:
 ----
 
 ![alt Lifecycle methods](https://cdn-images-1.medium.com/max/1600/1*u8hTumGAPQMYZIvfgQMfPA.jpeg)
----
-
-## Basic vs dumb vs smart
-Note:
-* TODO
 ---
 
 ## Higher-Order components
