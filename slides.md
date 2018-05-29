@@ -728,7 +728,6 @@ Note:
 
 Note:
 * Can be compared to onDestroy in Angular
-* Example: (https://gist.github.com/treyhuffine/8728583fd2985bd0cab1dfa403ba49ec#file-react-16-error-boundary-example-jsx)
 ----
 
 ### componentDidCatch()
@@ -738,7 +737,7 @@ Note:
 
 Note:
 * Only available since React 16
-* TODO: example code
+* Example: (https://gist.github.com/treyhuffine/8728583fd2985bd0cab1dfa403ba49ec#file-react-16-error-boundary-example-jsx)
 ----
 
 ### Conclusion
@@ -900,18 +899,26 @@ function withSubscription(WrappedComponent, selectData) {
 ----
 
 ### Keep in mind
-**HOC**s should be:
-* simple to use
-* don't require a manual
-* help implementing *DRY*
+* **HOC**s can be used for:
+  * logic reuse
+  * state abstraction
+  * props manipulation
 
-**HOC**s only work with classes
+* **HOC**s should be:
+  * simple to use
+  * don't require a manual
+  * help implementing *DRY*
+
+* **HOC**s only work with classes
 ----
 
 ### Try it out!
 * Implementing a reversable heading
 * [Sandbox: Higher-Order component START](https://codesandbox.io/s/6w2owlzxo3)
 * [Sandbox: Higher-Order component FINAL](https://codesandbox.io/s/q8m9qq4v86)
+* [Sandbox: Higher-Order component Decorator](https://codesandbox.io/s/n0kj87ny50)
+Note:
+* For further usage I will come back later in this talk
 ---
 
 ## Styling components
@@ -926,20 +933,41 @@ Note:
 
 ### Stylesheet per component
 * Just import plain stylesheet in your component:
-  ```jsx
-  import './style.css';
-  
-  ...
 
-  render() {
-    <div className="box">Just a styled box.</div>
-  }
-  ```
+```jsx
+import './style.css';
+
+...
+
+render() {
+  <div className="box">Just a styled box.</div>
+}
+```
+* [Sandbox: Stylesheet per component](https://codesandbox.io/s/z2011ox04x)
 * **Good**: clear component context
 * **Bad**: still global styles
 ----
 
-### Inline
+**Tip**: use `classnames`-module for multiple classes
+```jsx
+import classnames from 'classnames';
+
+const textStyles = {
+  'text' : true,
+  'highlighted' : false
+}
+
+const Hello = props => {
+  return (
+    <div className={classnames('box', 'container')}>
+      <p className={classnames(textStyles)}>{props.text}</p>
+    </div>
+  )
+};
+```
+----
+
+### Inline styling
 * Javascript objects
 * *camelCase* styles
 ```jsx
@@ -951,32 +979,36 @@ render() {
     <div style={boxStyle}>Just a styled box.</div>
 }
 ```
+* [Sandbox: Inline styling](https://codesandbox.io/s/mzxmqj989)
 * **Good**: local styles
-* **Bad**: bad performance, ugly code, hard to maintain
+* **Bad**: bad performance, ugly code, hard to maintain, no pseudo elements
 
 Note:
 * Inline styles only support a subset of CSS. Putting your styles inline into the DOM means you cannot use pseudo selectors, media queries, keyframes etc. (because the browser doesn’t recognise those things) | Max Stoiber 2016
 ----
 
 ### CSS Modules ([Demo](https://css-modules.github.io/webpack-demo/))
-* Local styles by default
 ```jsx
   import styles from './ScopedSelectors.css';
   import React from 'react';
 
   export default class ScopedSelectors extends React.Component {
-
     render() {
       return (
-        <div className={ styles.root }>
-          <p className={ styles.text }>Scoped Selectors</p>
+        <div className={styles.root}>
+          <p className={styles.text}>Scoped Selectors</p>
         </div>
       );
     }
-
   };
 ```
-* Global is optional
+----
+* **Local** styles by default
+* **Global** is optional (using `:global`)
+* Can be used in combination with preprocessor
+* [Sandbox: CSS Modules](https://codesandbox.io/s/q85v52p3m4)
+Note:
+* Show output in developer tools!
 ----
 
 ### CSS-in-JS
@@ -993,7 +1025,14 @@ Note:
 
   <button className={css(styles.button)} />
 ```
+----
+
+* _Writing_ in **JS**, _compiled_ to true **CSS**
+* Allows sharing code between JS and CSS
+* Useful for component libraries
 * Output can be compared to CSS Modules
+Note:
+* Styles can be completely isolated by using plugin (no inheritance)
 ----
 
 ### Keep in mind
