@@ -1013,6 +1013,16 @@ Note:
 
 ### CSS-in-JS
 * Mix of CSS Modules and Inline styles
+* _Writing_ in **JS**, _compiled_ to true **CSS** (*except Radium*)
+* Allows sharing code between JS and CSS
+* Useful for component libraries
+* Output can be compared to CSS Modules
+Note:
+* Styles can be completely isolated by using plugin (no inheritance)
+* Nice read for different vendors: https://hackernoon.com/all-you-need-to-know-about-css-in-js-984a72d48ebc
+----
+
+* **Aphrodite** provides function
 ```jsx
   import { StyleSheet, css } from 'aphrodite';
 
@@ -1025,22 +1035,15 @@ Note:
 
   <button className={css(styles.button)} />
 ```
-----
+* **JSS** provides styling through props: [Sandbox: CSS Modules](https://codesandbox.io/s/q85v52p3m4)
 
-* _Writing_ in **JS**, _compiled_ to true **CSS**
-* Allows sharing code between JS and CSS
-* Useful for component libraries
-* Output can be compared to CSS Modules
-Note:
-* Styles can be completely isolated by using plugin (no inheritance)
 ----
 
 ### Keep in mind
 * *React* has no opinion how to style components
-* Always use method that fits best to your project
+* Always use method that fits best to **your** project
 * Only load styles you need
 * Keep your styles maintainable
-* DRY
 
 Note:
 * In most cases just importing stylesheets per component (in combination with preprocessors) is totally sufficent
@@ -1800,6 +1803,7 @@ Note:
 * Scott Domes: https://engineering.musefind.com/react-lifecycle-methods-how-and-when-to-use-them-2111a1b692b1
 * Trey Huffine: https://levelup.gitconnected.com/componentdidmakesense-react-lifecycle-explanation-393dcb19e459
 * Max Stoiber: https://mxstbr.blog/2016/11/inline-styles-vs-css-in-js/
+* Indrek Lasn: https://hackernoon.com/all-you-need-to-know-about-css-in-js-984a72d48ebc
 * Paul Sherman: https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf
 * Brad Westfall: https://css-tricks.com/react-router-4/
 * Facebook: https://github.com/facebook/flux/tree/master/examples/flux-concepts
