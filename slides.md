@@ -1606,7 +1606,7 @@ Note:
 #### MobX is watching your components
 * Add **@observer** and you're fine
 * includes optimized **`shouldComponentUpdate`**
-* [Example](https://codesandbox.io/s/v3v0my2370)
+* [Sandbox: MobX and React](https://codesandbox.io/s/0ypqlxrkjn)
 Note:
 * MobX exactly wants to know where state is required therefore it can update
 * Only props accessed in `render()` method will be observed correctly
@@ -1622,14 +1622,16 @@ Note:
 * Computed values
 * Reactions
 ----
-### [Todo example in action](https://jsfiddle.net/mweststrate/wv3yopo0/)
-Note:
-TODO: Update to newest version
+### Todo in action!
+* Task: Implement an input component for adding Todos
+* [Sandbox: React + MobX ToDo](https://codesandbox.io/s/73r8j2p2jj)
+* [Sandbox: React + MobX ToDo with Input](https://codesandbox.io/s/626mqz379k)
 ----
 
 ### Provider and inject
-* Used to inject stores at everywhere
+* Used to inject stores everywhere
 * No more need to pass them down
+----
 
 ```jsx
 import { Provider } from 'mobx-react';
@@ -1757,11 +1759,12 @@ TODO: explain runInAction!
 - Really easy setup
 - Working with **Actions**, **Computed** values and **Reactions**
 - Always mutates the state
+----
 
 ### Bonus: TypeScript ftw
 * MobX is written in TS
 Note:
-* Explain!
+* TODO: Explain!
 ---
 
 ## MobX vs. Redux
