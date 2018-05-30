@@ -1036,7 +1036,6 @@ Note:
   <button className={css(styles.button)} />
 ```
 * **JSS** provides styling through props: [Sandbox: CSS Modules](https://codesandbox.io/s/q85v52p3m4)
-
 ----
 
 ### Keep in mind
@@ -1241,6 +1240,7 @@ Note:
 ----
 
 ### Accessing match / history / location
+----
 
 * Route component
 ```jsx
@@ -1275,7 +1275,7 @@ import { Route } from 'react-router-dom'
   props.match ? <PostsPage {...props}/> : <EmptyPage {...props}/>
 )}/>
 ```
-* withRouter
+* withRouter HOC
 ```jsx
 import { withRouter } from 'react-router-dom'
 const Button = withRouter(({ match, location, history }) => (
@@ -1289,7 +1289,14 @@ const Button = withRouter(({ match, location, history }) => (
 ```
 Note:
 * Best: use a decorator with @withRouter (ES7)
-* TODO: Codepen example!
+----
+
+### Playing around
+* Implement authentication
+* Tip: use render method for the route!
+[Sandbox: React Router](https://codesandbox.io/s/z6wq9wp284)
+[Sandbox: React Router with Authentication](https://codesandbox.io/s/olp9vxpzn5)
+* TODO: Explain single steps
 ----
 
 ### Recap
@@ -1312,6 +1319,7 @@ Note:
   - doesn’t require client to enable JS
 * Great community that contributes to the project
 * Tons of free open-source components
+* TODO: move or delete!
 ---
 
 ## State management
@@ -1806,6 +1814,7 @@ Note:
 * Indrek Lasn: https://hackernoon.com/all-you-need-to-know-about-css-in-js-984a72d48ebc
 * Paul Sherman: https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf
 * Brad Westfall: https://css-tricks.com/react-router-4/
+* Tyler McGinnis: https://tylermcginnis.com/react-router-protected-routes-authentication/
 * Facebook: https://github.com/facebook/flux/tree/master/examples/flux-concepts
 * Lin Clark: https://code-cartoons.com/a-cartoon-intro-to-redux-3afb775501a6
 * Michael Westrate:

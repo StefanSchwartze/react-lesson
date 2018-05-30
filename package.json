@@ -16,7 +16,9 @@
     "flux",
     "tutorial",
     "lesson",
-    "talk"
+    "talk",
+    "mobx",
+    "react-router"
   ],
   "author": "Stefan Schwartze",
   "license": "GPL-3.0",
