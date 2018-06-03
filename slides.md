@@ -7,18 +7,22 @@ Stefan Schwartze
 ## Before we start
 * All code examples are written in **ES6**
 * Code applies to React **v16**
+* For sandboxes type 'https://codesandbox.io/s/' + id
 * Don't hesitate to directly ask for questions
 ---
 
 ## About React
-* **Library** for creating interactive UIs
-* Created by Facebook in 2013
-* Goal: Splitting UI in different components
+* Library for creating interactive UIs<!-- .element: class="fragment" -->
+* Created by Facebook in 2013<!-- .element: class="fragment" -->
+* Goal: Splitting UI in different components<!-- .element: class="fragment" -->
+* Open source<!-- .element: class="fragment" -->
+* Popular because of simplicity<!-- .element: class="fragment" -->
+* Great community<!-- .element: class="fragment" -->
+* Ecosystem: thousands extensions written for React<!-- .element: class="fragment" -->
+* [Developers like it](https://stateofjs.com/2017/front-end/results/)<!-- .element: class="fragment" -->
 Note:
 * Very popular because of simplicity (at that time compared to Angular)
 * No router, no state management, no HTTP client etc  (keeps it small, no framework)
-* Difference compared to Angular etc.
-* TODO: Table with React, Angular etc.
 ---
 
 ## Basic principles of React
@@ -29,8 +33,10 @@ Note:
 const element = <h1>Hello, world!</h1>;
 ```
 * **Looks like**: HTML mixed with JavaScript 
+<!-- .element: class="fragment" -->
 
 * **Is**: No _string_, no _HTML_. Just JavaScript used for templates
+<!-- .element: class="fragment" -->
 Note:
 * React works without JSX, but nobody would ever do this
 * Usually compiled within transpilers like Babel
@@ -109,11 +115,12 @@ Note:
 
 ### What are components? 
 * Encapsulated, independent
+<!-- .element: class="fragment" -->
 * Can be nested to each other
+<!-- .element: class="fragment" -->
 
 ![alt Example structure of a blogging platform](https://cdn-images-1.medium.com/max/1600/0*4p1fVzn0x6rh6kL9.png)
-Note:
-* TODO: Image of component tree!
+<!-- .element: class="fragment" -->
 ----
 
 ### Creating a component
@@ -124,6 +131,7 @@ const Welcome = (props) => { // Functional
 }
 ```
 _equals to_
+<!-- .element: class="fragment" -->
 ```jsx
 class Welcome extends React.Component { // Class / Stateful
   render() {
@@ -131,6 +139,7 @@ class Welcome extends React.Component { // Class / Stateful
   }
 }
 ```
+<!-- .element: class="fragment" -->
 Note:
 From React's point of view equal
 ----
@@ -169,14 +178,15 @@ Note:
 ----
 
 ### Component types
-* **Functional**: simple JavaScript functions
-* **Stateless**: only render props received from outside
+* **Functional / Stateless**: simple JavaScript functions
 * **Stateful**: manage internal state
 ----
 
 ### Props 
 * Retrieving information from parent components
+<!-- .element: class="fragment" -->
 * Read-only
+<!-- .element: class="fragment" -->
 ----
 
 #### Passing props
@@ -235,12 +245,12 @@ PropTypes.string.isRequired
 * Default values for props
 ```jsx
 BlogPostExcerpt.propTypes = { 
-  title: PropTypes.string, 
-  description: PropTypes.string 
+    title: PropTypes.string, 
+    description: PropTypes.string 
 } 
 BlogPostExcerpt.defaultProps = { 
-  title: '', 
-  description: '' 
+    title: '', 
+    description: '' 
 }
 ```
 ----
@@ -270,7 +280,9 @@ Note:
 ----
 ### State
 * State stays internal
+<!-- .element: class="fragment" -->
 * Can only be modified by component (not from outside)
+<!-- .element: class="fragment" -->
 ----
 #### Default state
 ```jsx
@@ -298,16 +310,21 @@ Note:
 #### Mutating the state
 
 * State should **never** be mutated directly:
+<!-- .element: class="fragment" -->
 ```jsx
 this.state.clicked = true;
 ```
+<!-- .element: class="fragment" -->
 
 * Instead use:
+<!-- .element: class="fragment" -->
 ```jsx
 this.setState({ clicked: true});
 ```
+<!-- .element: class="fragment" -->
 
--> _Important to inform React about State changes_
+_Important to inform React about State changes_
+<!-- .element: class="fragment" -->
 Note:
 * setState is asynchronous, callback can be used as 2nd parameter
 ----
@@ -336,8 +353,8 @@ setInterval(tick, 1000);
 
 ### Try it out!
 * Convert functional to stateful component
-* [Sandbox: React setState START](https://codesandbox.io/s/0o9j58wv0n)
-* [Sandbox: React setState FINAL](https://codesandbox.io/s/y0xxlzlp81)
+* [Sandbox: React setState START 0o9j58wv0n](https://codesandbox.io/s/0o9j58wv0n)
+* [Sandbox: React setState FINAL y0xxlzlp81](https://codesandbox.io/s/y0xxlzlp81)
 ----
 
 ### Unidirectional data flow
@@ -347,7 +364,6 @@ setInterval(tick, 1000);
 Note:
 * Props get passed from top to bottom
 * State stays internally per component
-* TODO: nice graphic!
 ----
 #### Moving state up in the components tree
 
@@ -477,8 +493,8 @@ function ActionLink() {
 
 ### Try it out!
 * Implement two fields and change scale based by current input
-* [Sandbox: Unidirectional dataflow START](https://codesandbox.io/s/q99kx7p10q)
-* [Sandbox: Unidirectional dataflow FINAL](https://codesandbox.io/s/q99kx7p10q)
+* [Sandbox: Unidirectional dataflow START q99kx7p10q](https://codesandbox.io/s/q99kx7p10q)
+* [Sandbox: Unidirectional dataflow FINAL kw35p55vp5](https://codesandbox.io/s/kw35p55vp5)
 ----
 
 ## JSX: Conditional rendering and lists
@@ -734,10 +750,10 @@ Note:
 
 * Prevents crashing whole application
 * Allows to display some fallback UI
+* [Example code](https://gist.github.com/treyhuffine/8728583fd2985bd0cab1dfa403ba49ec#file-react-16-error-boundary-example-jsx)
 
 Note:
 * Only available since React 16
-* Example: (https://gist.github.com/treyhuffine/8728583fd2985bd0cab1dfa403ba49ec#file-react-16-error-boundary-example-jsx)
 ----
 
 ### Conclusion
@@ -904,19 +920,17 @@ function withSubscription(WrappedComponent, selectData) {
   * state abstraction
   * props manipulation
 
-* **HOC**s should be:
-  * simple to use
+* **HOC**s should:
+  * be simple to use
   * don't require a manual
   * help implementing *DRY*
-
-* **HOC**s only work with classes
 ----
 
 ### Try it out!
 * Implementing a reversable heading
-* [Sandbox: Higher-Order component START](https://codesandbox.io/s/6w2owlzxo3)
-* [Sandbox: Higher-Order component FINAL](https://codesandbox.io/s/q8m9qq4v86)
-* [Sandbox: Higher-Order component Decorator](https://codesandbox.io/s/n0kj87ny50)
+* [Sandbox: Higher-Order component START 6w2owlzxo3](https://codesandbox.io/s/6w2owlzxo3)
+* [Sandbox: Higher-Order component FINAL q8m9qq4v86](https://codesandbox.io/s/q8m9qq4v86)
+* [Sandbox: Higher-Order component Decorator n0kj87ny50](https://codesandbox.io/s/n0kj87ny50)
 Note:
 * For further usage I will come back later in this talk
 ---
@@ -943,7 +957,7 @@ render() {
   <div className="box">Just a styled box.</div>
 }
 ```
-* [Sandbox: Stylesheet per component](https://codesandbox.io/s/z2011ox04x)
+* [Sandbox: Stylesheet per component z2011ox04x](https://codesandbox.io/s/z2011ox04x)
 * **Good**: clear component context
 * **Bad**: still global styles
 ----
@@ -979,7 +993,7 @@ render() {
     <div style={boxStyle}>Just a styled box.</div>
 }
 ```
-* [Sandbox: Inline styling](https://codesandbox.io/s/mzxmqj989)
+* [Sandbox: Inline styling mzxmqj989](https://codesandbox.io/s/mzxmqj989)
 * **Good**: local styles
 * **Bad**: bad performance, ugly code, hard to maintain, no pseudo elements
 
@@ -1006,7 +1020,7 @@ Note:
 * **Local** styles by default
 * **Global** is optional (using `:global`)
 * Can be used in combination with preprocessor
-* [Sandbox: CSS Modules](https://codesandbox.io/s/q85v52p3m4)
+* [Sandbox: CSS Modules q85v52p3m4](https://codesandbox.io/s/q85v52p3m4)
 Note:
 * Show output in developer tools!
 ----
@@ -1035,14 +1049,18 @@ Note:
 
   <button className={css(styles.button)} />
 ```
-* **JSS** provides styling through props: [Sandbox: CSS Modules](https://codesandbox.io/s/q85v52p3m4)
+* **JSS** provides styling through props: [Sandbox: CSS Modules q85v52p3m4](https://codesandbox.io/s/q85v52p3m4)
 ----
 
 ### Keep in mind
-* *React* has no opinion how to style components
-* Always use method that fits best to **your** project
+* React has no opinion how to style components
+<!-- .element: class="fragment" -->
+* Always use method that fits best to your project
+<!-- .element: class="fragment" -->
 * Only load styles you need
+<!-- .element: class="fragment" -->
 * Keep your styles maintainable
+<!-- .element: class="fragment" -->
 
 Note:
 * In most cases just importing stylesheets per component (in combination with preprocessors) is totally sufficent
@@ -1294,8 +1312,9 @@ Note:
 ### Playing around
 * Implement authentication
 * Tip: use render method for the route!
-[Sandbox: React Router](https://codesandbox.io/s/z6wq9wp284)
-[Sandbox: React Router with Authentication](https://codesandbox.io/s/olp9vxpzn5)
+[Sandbox: React Router z6wq9wp284](https://codesandbox.io/s/z6wq9wp284)
+[Sandbox: React Router with Authentication olp9vxpzn5](https://codesandbox.io/s/olp9vxpzn5)
+Todo:
 * TODO: Explain single steps
 ----
 
@@ -1308,7 +1327,7 @@ Note:
 * Layouts should keep that decentralized approach in mind
 ---
 
-## Advantages of React:
+<!-- ## Advantages of React:
 * Small / Simple / Modular
 * Very comfortable JSX syntax (supporting full JS usage)
   - No custom keywords required like *ngFor, *ngIf, pipes | v-if, v-for, just plain JS!
@@ -1320,7 +1339,7 @@ Note:
 * Great community that contributes to the project
 * Tons of free open-source components
 * TODO: move or delete!
----
+--- -->
 
 ## State management
 ----
@@ -1606,7 +1625,7 @@ Note:
 #### MobX is watching your components
 * Add **@observer** and you're fine
 * includes optimized **`shouldComponentUpdate`**
-* [Sandbox: MobX and React](https://codesandbox.io/s/0ypqlxrkjn)
+* [Sandbox: MobX and React 0ypqlxrkjn](https://codesandbox.io/s/0ypqlxrkjn)
 Note:
 * MobX exactly wants to know where state is required therefore it can update
 * Only props accessed in `render()` method will be observed correctly
@@ -1623,9 +1642,9 @@ Note:
 * Reactions
 ----
 ### Todo in action!
-* Task: Implement an input component for adding Todos
-* [Sandbox: React + MobX ToDo](https://codesandbox.io/s/73r8j2p2jj)
-* [Sandbox: React + MobX ToDo with Input](https://codesandbox.io/s/626mqz379k)
+* **Task**: Implement an input component for adding Todos
+* [Sandbox: React + MobX ToDo 73r8j2p2jj](https://codesandbox.io/s/73r8j2p2jj)
+* [Sandbox: React + MobX ToDo with Input 626mqz379k](https://codesandbox.io/s/626mqz379k)
 ----
 
 ### Provider and inject
@@ -1717,7 +1736,7 @@ class Store {
     }
 }
 ```
-<!-- .element: class="stretch" -->
+<!-- .element: class="stretch" data-line="12, 18" -->
 ----
 
 #### Using async / await
@@ -1755,17 +1774,41 @@ TODO: explain runInAction!
 (for all components that consume observables)
 ----
 
+### Keep business logic in stores
+----
+
+### Separate REST calls from stores
+```jsx
+class TodoApi {
+
+  fetchTodos = () => request.get('/todos')
+}
+
+class TodoStore {
+
+  @observable todos = [];
+
+  constructor(todoApi) {
+    this.todoApi = todoApi;
+  }
+  
+  @action fetchTodos = async () => {
+    this.todos = await this.todoApi.fetchTodos();
+  }
+}
+
+// Then in your main
+const todoApi = new TodoApi();
+const todoStore = new TodoStore(todoApi);
+```
+----
+
 ### Recap
 - Really easy setup
 - Working with **Actions**, **Computed** values and **Reactions**
 - Always mutates the state
+- No given structure
 ----
-
-### Bonus: TypeScript ftw
-* MobX is written in TS
-Note:
-* TODO: Explain!
----
 
 ## MobX vs. Redux
 MobX | Redux
@@ -1785,27 +1828,116 @@ No rollback | Timetravel by default
 * Depends. Start with setState.
 * When bubbling along tree becomes **too** complicated, go!
 * Keep in mind: state management adds complexity!
-Note:
 ---
 
-### Hands on your keyboard
-* Be sure **Node >= 6** is installed
-* Get started:
-```bash
-  npx create-react-app my-app
-  cd my-app
-  npm start
-```
-* Use React developer tools for debugging
+## Best practices in React
 ----
 
-## React developer tools
-Note: 
-* Show props and state changes in React developer tools
-* TODO: Example pages
+### Prefer functional components
+----
+
+### Use propTypes
+----
+
+### Use handlers
+```jsx
+handleSubmit = (e) => {
+  e.preventDefault()
+  this.props.model.save()
+}
+
+handleNameChange = (e) => {
+  this.props.model.changeName(e.target.value)
+}
+
+handleExpand = (e) => {
+  e.preventDefault()
+  this.setState({ expanded: !this.state.expanded })
+}
+```
+----
+
+### Destructure props / state
+```jsx
+render() {
+  const {
+    model,
+    title
+  } = this.props
+  return ( 
+    <ExpandableForm 
+      onSubmit={this.handleSubmit} 
+      expanded={this.state.expanded} 
+      onExpand={this.handleExpand}>
+      <div>
+        <h1>{title}</h1>
+        <input
+          type="text"
+          value={model.name}
+          onChange={this.handleNameChange}
+          placeholder="Your Name"/>
+      </div>
+    </ExpandableForm>
+  )
+}
+```
+----
+
+### HOCs
+* Decorators for classes
+```jsx
+@observer
+export default class ProfileContainer extends Component {
+...
+```
+
+* Wrapping functions for functional components
+```jsx
+export default observer(ExpandableForm)
+```
+----
+
+### Conditionals in JSX
+**Don't:**
+```jsx
+{
+  isTrue
+   ? <p>True!</p>
+   : <none/>
+}
+```
+
+**Do:**
+```jsx
+{
+  isTrue && 
+    <p>True!</p>
+}
+```
 ---
 
-### Task I
+### Task 1
+* Implement input with autosuggest:
+  * SearchStore
+  * Search component
+  * Component for listing location suggestions
+* API in 'utils/weatherApi.js'
+* Debounce function in 'utils/helpers.js'
+* [Codesandbox: React Weather App - Part 1 kv04y2yno](https://codesandbox.io/s/kv04y2yno)
+----
+
+### Task 2
+* Implement weather display for clicked location
+  * LocationStore
+  * Component for displaying weather(s) of location
+* Component for single weather is in 'components/Weather.js'
+* [Codesandbox: React Weather App - Part 2 pm9lk2kql7](https://codesandbox.io/s/pm9lk2kql7)
+----
+
+### Task 3
+* Implement routing for locations
+* [Codesandbox: React Weather App - Part 3 l3pk2q3lzq](https://codesandbox.io/s/l3pk2q3lzq)
+---
 
 ## Sources
 
@@ -1830,6 +1962,4 @@ Note:
 * [Redux](https://github.com/gothinkster/react-redux-realworld-example-app)
 * [MobX](https://github.com/gothinkster/react-mobx-realworld-example-app)
 
-TODO: React statistics of usage in projects; compare to other popular libraries and frameworks; why do people use it again?
-TODO: Explain create-react-app before coding session
 TODO: Add best practices to all sections
