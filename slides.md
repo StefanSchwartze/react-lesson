@@ -2,7 +2,15 @@
 
 Stefan Schwartze
 
----
+----
+
+## I'll talk about
+
+* React Basics
+* Styling components
+* React Router
+* State management
+----
 
 ## Before we start
 * All code examples are written in **ES6**
@@ -22,7 +30,7 @@ Stefan Schwartze
 * [Developers like it](https://stateofjs.com/2017/front-end/results/)<!-- .element: class="fragment" -->
 Note:
 * Very popular because of simplicity (at that time compared to Angular)
-* No router, no state management, no HTTP client etc  (keeps it small, no framework)
+* No router, no state management, no HTTP client etc (keeps it small, no framework)
 ---
 
 ## Basic principles of React
@@ -275,8 +283,6 @@ class Welcome extends Component {
   } 
 } 
 ```
-Note:
-* Doesn't work for functional components because component class is missing
 ----
 ### State
 * State stays internal
@@ -284,6 +290,7 @@ Note:
 * Can only be modified by component (not from outside)
 <!-- .element: class="fragment" -->
 ----
+
 #### Default state
 ```jsx
 class BlogPostExcerpt extends React.Component {
@@ -495,7 +502,7 @@ function ActionLink() {
 * Implement two fields and change scale based by current input
 * [Sandbox: Unidirectional dataflow START q99kx7p10q](https://codesandbox.io/s/q99kx7p10q)
 * [Sandbox: Unidirectional dataflow FINAL kw35p55vp5](https://codesandbox.io/s/kw35p55vp5)
-----
+---
 
 ## JSX: Conditional rendering and lists
 ----
@@ -518,6 +525,26 @@ Note:
 * Angular uses specific keywords like *ngIf, JSX just uses plain JavaScript
 ----
 
+#### Tip: use shorthand!
+
+**Don't:**
+```jsx
+{
+  isTrue
+   ? <p>True!</p>
+   : <none/>
+}
+```
+
+**Do:**
+```jsx
+{
+  isTrue && 
+    <p>True!</p>
+}
+```
+----
+
 ### Lists
 ```jsx
 function NumberList({ numbers }) {
@@ -538,9 +565,28 @@ ReactDOM.render(
 );
 ```
 [Codepen](https://codepen.io/gaearon/pen/jrXYRR?editors=0011)
+Note:
+* Use keys!
 ----
 
-### Examples comparing Angular vs. React
+#### Tip: use JS methods
+
+```jsx
+<ul>
+  {items.filter({done} => done).map(item => 
+    <li key={item.id}>{item.text}</li>
+  )}
+</ul>
+```
+
+[Codepen](https://codepen.io/gaearon/pen/NRZYGN?editors=0010)
+----
+
+* **Always** use keys to avoid re-rendering
+* **Don't** use index: can cause problems with sorting; is used by default
+* **Use** plain JS functions for conditions and loops
+----
+### Examples comparing Angular vs. React (optional)
 ----
 
 #### Simple looping
@@ -639,11 +685,6 @@ Conditions | *ngIf / else / then | a ? b : c (pure JS)
 Loops | *ngFor | .map, .forEach ...
 Indexing | trackByFn | key = ...
 Reduce, filter | Custom func. | JS
-----
-
-* **Always** use keys to avoid re-rendering
-* **Don't** use index: can cause problems with sorting; is used by default
-* **Use** plain JS functions for conditions and loops
 ---
 
 ## React lifecycle methods
@@ -763,7 +804,7 @@ Note:
 * Can be used for performance improvements
 ----
 
-![alt Lifecycle methods](https://cdn-images-1.medium.com/max/1600/1*u8hTumGAPQMYZIvfgQMfPA.jpeg)
+[Lifecycle methods overview](https://cdn-images-1.medium.com/max/1600/1*u8hTumGAPQMYZIvfgQMfPA.jpeg)
 ---
 
 ## Higher-Order components
@@ -1555,7 +1596,7 @@ TODO: explain runInAction!
 ### Keep business logic in stores
 ----
 
-### Separate REST calls from stores
+#### Separate REST calls from stores
 ```jsx
 class TodoApi {
 
@@ -1579,6 +1620,7 @@ class TodoStore {
 const todoApi = new TodoApi();
 const todoStore = new TodoStore(todoApi);
 ```
+<!-- .element: class="stretch" -->
 ----
 
 ### Recap
