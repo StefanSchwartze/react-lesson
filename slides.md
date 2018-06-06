@@ -360,8 +360,8 @@ setInterval(tick, 1000);
 
 ### Try it out!
 * Convert functional to stateful component
-* [Sandbox: React setState START 0o9j58wv0n](https://codesandbox.io/s/0o9j58wv0n)
-* [Sandbox: React setState FINAL y0xxlzlp81](https://codesandbox.io/s/y0xxlzlp81)
+* [Sandbox: React setState START](https://codesandbox.io/s/0o9j58wv0n)
+* [Sandbox: React setState FINAL](https://codesandbox.io/s/y0xxlzlp81)
 ----
 
 ### Unidirectional data flow
@@ -500,8 +500,8 @@ function ActionLink() {
 
 ### Try it out!
 * Implement two fields and change scale based by current input
-* [Sandbox: Unidirectional dataflow START q99kx7p10q](https://codesandbox.io/s/q99kx7p10q)
-* [Sandbox: Unidirectional dataflow FINAL kw35p55vp5](https://codesandbox.io/s/kw35p55vp5)
+* [Sandbox: Unidirectional dataflow START](https://codesandbox.io/s/q99kx7p10q)
+* [Sandbox: Unidirectional dataflow FINAL](https://codesandbox.io/s/kw35p55vp5)
 ---
 
 ## JSX: Conditional rendering and lists
@@ -969,9 +969,9 @@ function withSubscription(WrappedComponent, selectData) {
 
 ### Try it out!
 * Implementing a reversable heading
-* [Sandbox: Higher-Order component START 6w2owlzxo3](https://codesandbox.io/s/6w2owlzxo3)
-* [Sandbox: Higher-Order component FINAL q8m9qq4v86](https://codesandbox.io/s/q8m9qq4v86)
-* [Sandbox: Higher-Order component Decorator n0kj87ny50](https://codesandbox.io/s/n0kj87ny50)
+* [Sandbox: Higher-Order component START](https://codesandbox.io/s/6w2owlzxo3)
+* [Sandbox: Higher-Order component FINAL](https://codesandbox.io/s/q8m9qq4v86)
+* [Sandbox: Higher-Order component Decorator](https://codesandbox.io/s/n0kj87ny50)
 Note:
 * For further usage I will come back later in this talk
 ---
@@ -998,7 +998,7 @@ render() {
   <div className="box">Just a styled box.</div>
 }
 ```
-* [Sandbox: Stylesheet per component z2011ox04x](https://codesandbox.io/s/z2011ox04x)
+* [Sandbox: Stylesheet per component](https://codesandbox.io/s/z2011ox04x)
 * **Good**: clear component context
 * **Bad**: still global styles
 ----
@@ -1034,7 +1034,7 @@ render() {
     <div style={boxStyle}>Just a styled box.</div>
 }
 ```
-* [Sandbox: Inline styling mzxmqj989](https://codesandbox.io/s/mzxmqj989)
+* [Sandbox: Inline styling](https://codesandbox.io/s/mzxmqj989)
 * **Good**: local styles
 * **Bad**: bad performance, ugly code, hard to maintain, no pseudo elements
 
@@ -1061,7 +1061,7 @@ Note:
 * **Local** styles by default
 * **Global** is optional (using `:global`)
 * Can be used in combination with preprocessor
-* [Sandbox: CSS Modules q85v52p3m4](https://codesandbox.io/s/q85v52p3m4)
+* [Sandbox: CSS Modules](https://codesandbox.io/s/q85v52p3m4)
 Note:
 * Show output in developer tools!
 ----
@@ -1090,7 +1090,7 @@ Note:
 
   <button className={css(styles.button)} />
 ```
-* **JSS** provides styling through props: [Sandbox: CSS Modules q85v52p3m4](https://codesandbox.io/s/q85v52p3m4)
+* **JSS** provides styling through props: [Sandbox: CSS Modules](https://codesandbox.io/s/k5x13612mo)
 ----
 
 ### Keep in mind
@@ -1353,10 +1353,8 @@ Note:
 ### Playing around
 * Implement authentication
 * Tip: use render method for the route!
-[Sandbox: React Router z6wq9wp284](https://codesandbox.io/s/z6wq9wp284)
-[Sandbox: React Router with Authentication olp9vxpzn5](https://codesandbox.io/s/olp9vxpzn5)
-Todo:
-* TODO: Explain single steps
+[Sandbox: React Router](https://codesandbox.io/s/z6wq9wp284)
+[Sandbox: React Router with Authentication](https://codesandbox.io/s/olp9vxpzn5)
 ----
 
 ### Recap
@@ -1444,7 +1442,7 @@ Note:
 #### MobX is watching your components
 * Add **@observer** and you're fine
 * includes optimized **`shouldComponentUpdate`**
-* [Sandbox: MobX and React 0ypqlxrkjn](https://codesandbox.io/s/0ypqlxrkjn)
+* [Sandbox: MobX and React](https://codesandbox.io/s/0ypqlxrkjn)
 Note:
 * MobX exactly wants to know where state is required therefore it can update
 * Only props accessed in `render()` method will be observed correctly
@@ -1462,8 +1460,8 @@ Note:
 ----
 ### Todo in action!
 * **Task**: Implement an input component for adding Todos
-* [Sandbox: React + MobX ToDo 73r8j2p2jj](https://codesandbox.io/s/73r8j2p2jj)
-* [Sandbox: React + MobX ToDo with Input 626mqz379k](https://codesandbox.io/s/626mqz379k)
+* [Sandbox: React + MobX ToDo](https://codesandbox.io/s/73r8j2p2jj)
+* [Sandbox: React + MobX ToDo with Input](https://codesandbox.io/s/626mqz379k)
 ----
 
 ### Provider and inject
@@ -1584,8 +1582,6 @@ class Store {
     }
 }
 ```
-Note:
-TODO: explain runInAction!
 ----
 
 ### *Should I use observer for each component?*
