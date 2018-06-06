@@ -1,7 +1,7 @@
 {
   "name": "react-lesson",
   "version": "1.0.0",
-  "description": "A lesson about the basics of react, including react-router, flux and a coding session.",
+  "description": "A lesson about the basics of react, including react-router, styling and MobX.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

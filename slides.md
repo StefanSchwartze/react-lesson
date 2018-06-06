@@ -1720,25 +1720,15 @@ export default observer(ExpandableForm)
 
 ## Sources
 
-* React docs: https://reactjs.org/docs
-* Flavio Copes: https://medium.freecodecamp.org/the-beginners-guide-to-react-9be65f50a55c
-* Scott Domes: https://engineering.musefind.com/react-lifecycle-methods-how-and-when-to-use-them-2111a1b692b1
-* Trey Huffine: https://levelup.gitconnected.com/componentdidmakesense-react-lifecycle-explanation-393dcb19e459
-* Max Stoiber: https://mxstbr.blog/2016/11/inline-styles-vs-css-in-js/
-* Indrek Lasn: https://hackernoon.com/all-you-need-to-know-about-css-in-js-984a72d48ebc
-* Paul Sherman: https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf
-* Brad Westfall: https://css-tricks.com/react-router-4/
-* Tyler McGinnis: https://tylermcginnis.com/react-router-protected-routes-authentication/
-* Facebook: https://github.com/facebook/flux/tree/master/examples/flux-concepts
-* Lin Clark: https://code-cartoons.com/a-cartoon-intro-to-redux-3afb775501a6
-* Michael Westrate:
-  * https://hackernoon.com/becoming-fully-reactive-an-in-depth-explanation-of-mobservable-55995262a254
-  * https://mobx.js.org/
-* Gupta Garuda: https://hackernoon.com/introduction-to-redux-and-mobx-e6fa98b6479
-
-## Real-world examples
-
-* [Redux](https://github.com/gothinkster/react-redux-realworld-example-app)
-* [MobX](https://github.com/gothinkster/react-mobx-realworld-example-app)
-
-TODO: Add best practices to all sections
+[React docs](https://reactjs.org/docs),
+[Flavio Copes](https://medium.freecodecamp.org/the-beginners-guide-to-react-9be65f50a55c),
+[Scott Domes](https://engineering.musefind.com/react-lifecycle-methods-how-and-when-to-use-them-2111a1b692b1),
+[Trey Huffine](https://levelup.gitconnected.com/componentdidmakesense-react-lifecycle-explanation-393dcb19e459),
+[Max Stoiber](https://mxstbr.blog/2016/11/inline-styles-vs-css-in-js/),
+[Indrek Lasn](https://hackernoon.com/all-you-need-to-know-about-css-in-js-984a72d48ebc),
+[Paul Sherman](https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf),
+[Brad Westfall](https://css-tricks.com/react-router-4/),
+[Tyler McGinnis](https://tylermcginnis.com/react-router-protected-routes-authentication/),
+[Michael Westrate](https://hackernoon.com/becoming-fully-reactive-an-in-depth-explanation-of-mobservable-55995262a254)
+[MobX docs](https://mobx.js.org/),
+[Gupta Garuda](https://hackernoon.com/introduction-to-redux-and-mobx-e6fa98b6479),
