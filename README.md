@@ -8,6 +8,7 @@ This is a lesson about React.js. It helps to get started with:
 To get started, first install all dependencies:
 ```bash
 $ npm install
+$ npm install -g reveal-md
 ```
 
 To run the presentation, type:
